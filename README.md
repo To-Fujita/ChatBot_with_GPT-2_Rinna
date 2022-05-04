@@ -1,7 +1,7 @@
 # ChatBot_with_GPT-2_Rinna
 
 ## 1. description
-This is a chat bot for Japanese based on the GPT-2 Rinna. You can communicate to this chat bot by keyboard and/or voice.
+This is a chat bot for Japanese based on the GPT-2 Rinna. You can speak to this chat bot by keyboard and/or voice.
 
 ## 2. Operational Environment
 - Windows 10/11 64-bit
