@@ -19,7 +19,7 @@ I have confirmed this Python Script on the above conditions only. I will show yo
 Please download following file and put these unzipped folder under the system path passed.
 - ChatBot_with_GPT-2_Rinna: Please download from above "Code".
 
-(b) Install some libraries to your Python
+(b) Install some libraries to your Python  
 Please install following libraries to your Python system.
 - Pytorch: pip install torch
 - Transformers: pip install transformers
