@@ -10,6 +10,7 @@ This is a chat bot for Japanese based on the GPT-2 Rinna. You can communicate to
 - Browser: Microsoft Edge or Google Chrome
 
 ## 3. Demo
+![ChatBot_001](https://to-fujita.github.io/Images/Rinna_001.png "Images for ChatBot")
 
 ## 4. Details
 I have confirmed this Python Script on the above conditions only. I will show you below how to execute the Python script.
