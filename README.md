@@ -43,7 +43,7 @@ This Chat Bot is created in following concepts.
 - The human interface is given in HTML and JavaScript.
 - The answer from the chat bot is created in Python.
 
-In this time, I used the "Dialog Element" in HTML. The Safari and the FireFox are not supported for bthe Dialog Element, yet. Then, it is not working well by the Safari and the FireFox. Please enjoy the communication with the Chat Bot on the Microsoft Edge or the Google Chrome.
+In this time, I used the "Dialog Element" in HTML. The Safari and the FireFox are not supported for the Dialog Element, yet. Therefor, it is not working well by the Safari and the FireFox. Please enjoy the talk with the Chat Bot on the Microsoft Edge or the Google Chrome.
 
 ## 5. Reference
 - [GPT-2 Rinna](https://rinna.co.jp/)
