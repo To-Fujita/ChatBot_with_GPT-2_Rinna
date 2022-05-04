@@ -31,7 +31,7 @@ Please install following libraries to your Python system.
 The  Chat Bot program is as follow.
 - main_JP_Rinna.py
 
-Please open the above file by the VS Code, then click the "Run" and the "Start Debugging" or the "Run Without Debugging". Wait a few minutes, it will be displaied "*Running on http://127.0.0.1:5000/(Press CTRL+C to quit)" at the Terminal.
+Please open the above file by the VS Code, then click the "Run" and the "Start Debugging" or the "Run Without Debugging". Wait a few minutes, it will be displayed "*Running on http://127.0.0.1:5000/(Press CTRL+C to quit)" at the Terminal.
 Then, after open the Browser, please input "http://127.0.0.1:5000". You can tolk with the Chat Bot by keybord and/or voice.
   
 When you run the Rinna for the first time, it takes a few minutes to download various files. 
