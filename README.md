@@ -34,6 +34,8 @@ The  Chat Bot program is as follow.
 Please open the above file by the VS Code, then click the "Run" and the "Start Debugging" or the "Run Without Debugging". Wait a few minutes, it will be displaied "*Running on http://127.0.0.1:5000/(Press CTRL+C to quit)" at the Terminal.
 Then, after open the Browser, please input "http://127.0.0.1:5000". You can tolk with the Chat Bot by keybord and/or voice.
   
+When you run the Rinna for the first time, it takes a few minutes to download various files. 
+  
 This Chat Bot is created in following concepts.
 - The human interface is given in HTML and JavaScript.
 - The answer from the chat bot is created in Python.
@@ -41,13 +43,13 @@ This Chat Bot is created in following concepts.
 In this time, I used the "Dialog Element" in HTML. The Safari and the FireFox are not supported for bthe Dialog Element, yet. Then, it is not working well by the Safari and the FireFox. Please enjoy the communication with the Chat Bot on the Microsoft Edge or the Google Chrome.
 
 ## 5. Reference
-- GPT-2 Rinna
-- Visual Studio Code
-- Python
+- [GPT-2 Rinna](https://rinna.co.jp/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Python](https://www.python.org/)
 
 ## 6. License
 - Programs: MIT
 - All of the images and GPT-2 Rinna: Please confirm to each author.
 
 ## 7. Author
-T. Fujita
+[T. Fujita](https://github.com/To-Fujita)
