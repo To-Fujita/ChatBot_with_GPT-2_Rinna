@@ -1,6 +1,7 @@
 # ChatBot_with_GPT-2_Rinna
-This is a chat bot for Japanese by using GPT-2 Rinna.
+
 ## 1. description
+This is a chat bot for Japanese based on the GPT-2 Rinna. You can communicate to this chat bot by keyboard and/or voice.
 
 ## 2. Operational Environment
 - Windows 10/11 64-bit
@@ -11,10 +12,33 @@ This is a chat bot for Japanese by using GPT-2 Rinna.
 ## 3. Demo
 
 ## 4. Details
+I have confirmed this Python Script on the above conditions only. I will show you below how to execute the Python script.
 
 ### 4-1. Preparation
+(a) Download & unzip the file.  
+Please download following file and put these unzipped folder under the system path passed.
+- ChatBot_with_GPT-2_Rinna: Please download from above "Code".
+
+(b) Install some libraries to your Python
+Please install following libraries to your Python system.
+- Pytorch: pip install torch
+- Transformers: pip install transformers
+- SentencePiece: pip install sentencepiece
+- Janome: pip install janome
+- Flask: pip install Flask
 
 ### 4-2. Try to communicate with the chat bot
+The  Chat Bot program is as follow.
+- main_JP_Rinna.py
+
+Please open the above file by the VS Code, then click the "Run" and the "Start Debugging" or the "Run Without Debugging". Wait a few minutes, it will be displaied "*Running on http://127.0.0.1:5000/(Press CTRL+C to quit)" at the Terminal.
+Then, after open the Browser, please input "http://127.0.0.1:5000". You can tolk with the Chat Bot by keybord and/or voice.
+  
+This Chat Bot is created in following concepts.
+- The human interface is given in HTML and JavaScript.
+- The answer from the chat bot is created in Python.
+
+In this time, I used the "Dialog Element" in HTML. The Safari and the FireFox are not supported for bthe Dialog Element, yet. Then, it is not working well by the Safari and the FireFox. Please enjoy the communication with the Chat Bot on the Microsoft Edge or the Google Chrome.
 
 ## 5. Reference
 - GPT-2 Rinna
