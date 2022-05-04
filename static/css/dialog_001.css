@@ -1,0 +1,371 @@
+/* CSS for Dialog Box 2021/06/24 by T. Fujita */
+/* for Dialog Box */
+    dialog {
+        padding: 0;
+        border: 1px solid #eee;
+        box-shadow: 1px 1px 2px #333;
+        position: relative;
+        width: 500px;
+        height: 400px;
+        overflow: hidden;
+        background-color: #bcbcff;
+        font-size: 24px;
+    }
+        
+    dialog[open]{
+        animation: fade 1s ease 0s 1 normal;
+    }
+
+    .rightButton{
+        background-color: #0004ff;
+        text-align: center;
+        margin: 10px auto 20px auto;
+        padding: 10px;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #fff;
+        box-shadow: 0px 1px 3px #8bb8fa;
+        cursor: pointer;
+        position:absolute;
+        right: 20px;
+        bottom: 2px;
+        opacity: 1;
+    }
+    .leftButton{
+        background-color: #b80000;
+        text-align: center;
+        margin: 10px auto 20px auto;
+        padding: 10px;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #fff;
+        box-shadow: 0px 1px 3px rgb(83, 0, 0);
+        cursor: pointer;
+        position:absolute;
+        left: 20px;
+        bottom: 2px;
+        opacity: 1;
+    }
+    .normalButton{
+        background-color: #005005;
+        text-align: center;
+        margin: 10px auto 20px auto;
+        padding: 10px;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #fff;
+        box-shadow: 0px 1px 3px rgb(4, 109, 0);
+        cursor: pointer;
+        opacity: 1;
+        position: relative;
+    }
+
+/* Inside for Dialog Box */
+    nav ul {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+            
+    .nav {
+        width: 500px;
+        margin: 0 auto;
+        background: #8080ff;
+        color: #f0f0f0;
+    }
+    .nav a {
+        display: block;
+        padding: 0 8px;
+        line-height: inherit;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .nav__menu {
+        line-height: 45px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+    .nav__menu-item {
+        display: inline-block;
+        position: relative;
+    }
+    .nav__menu-item:hover {
+        background-color: #4040ff;
+    }
+    .nav__menu-item:hover .nav__submenu {
+        display: block;
+    }
+    .nav__submenu {
+        font-weight: 300;
+        text-transform: none;
+        display: none;
+        position: absolute;
+        width: 132px;
+        background-color: #4040ff;
+    }
+    .nav__submenu-item:hover {
+        background: #0000ff;
+    }
+
+/*-------------------- profile_wrapper --------------------*/
+    .profile_wrapper {
+        position: absolute;
+        top: 64%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 295px;
+        height: 438px;
+        font-family: "Source Sans Pro", sans-serif;
+        transform-style: preserve-3d;
+        transform: translate(-50%, -50%) perspective(600px) rotateY(20deg) rotateX(10deg);
+    }
+
+/*-------------------- Me --------------------*/
+    .me {
+        position: relative;
+        width: 295px;
+        height: 438px;
+        transform: translateZ(80px) scale(0.8);
+    }
+    .me::before, .me::after {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        top: 20;
+        left: 0;
+        border-radius: 10px;
+        background: url("../images/HAL_a.png") no-repeat 0 0;
+        background-size: 100%;
+    }
+    .me::after {
+        height: 30px;
+        top: auto;
+        bottom: -15px;
+        z-index: -1;
+        filter: blur(15px);
+        background-size: 100% 30px;
+        border-radius: 100px;
+    }
+    .me .eye, .me .eye::before {
+        width: 70px;
+        height: 70px;
+        position: absolute;
+        top: 155px;
+        left: 60px;
+        z-index: -1;
+        background: url("../images/eye_a.png") no-repeat center;
+        background-size: 80%;
+    }
+    .me .eye::before {
+        content: "";
+        top: 2px;
+        left: 66px;
+    }
+            
+    .text {
+        position: absolute;
+        top: -7%;
+        left: -7%;
+        z-index: 2;
+        width: 312px;
+        height: 476px;
+        transform: translateZ(150px) translateX(-11px) translateY(-26px) scale(0.55);
+        border: 3px solid white;
+        text-align: center;
+        font-size: 48px;
+        line-height: 800px;
+        color: rgb(255, 255, 255);
+        background: linear-gradient(135deg, white 0%, rgba(255, 255, 255, 0.36) 39%, rgba(255, 255, 255, 0.07) 41%, rgba(255, 255, 255, 0) 51%, black 100%);
+        opacity: 0.4;
+        border-radius: 8px;
+    }
+    .text::after {
+        content: "by T. Fujita";
+        width: 100%;
+        position: absolute;
+        bottom: 22px;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+        line-height: 1;
+        font-size: 18px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        text-indent: 20px;
+    }
+
+/* Style for Radio Button */
+    .radiobutton {
+	    position: relative;
+        left: 50px;
+    }
+    .radiobutton label {
+	    padding: 0 0 0 24px;	/* ラベルの位置 */
+	    font-size: 24px;
+	    line-height: 28px;		/* ボタンのサイズに合わせる */
+	    display: inline-block;
+	    cursor:	pointer;
+	    position: relative;
+    }
+    .radiobutton label:before {
+	    content: '';
+	    width: 28px;		/* ボタンの横幅 */
+	    height: 28px;		/* ボタンの縦幅 */
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    background-color: #00f;
+	    border-radius: 50%;
+    }
+    .radiobutton input[type="radio"] {
+	    display: none;
+    }
+    .radiobutton input[type="radio"]:checked + label:after {
+	    content: '';
+	    width: 10px;		/* マークの横幅 */
+	    height: 10px;		/* マークの縦幅 */
+	    position: absolute;
+	    top: 9px;
+	    left: 9px;
+	    background-color: #fff;
+	    border-radius: 50%;
+    }           
+    .radiobutton_mid {
+	    position: relative;
+        left: 250px;
+    }
+    .radiobutton_mid label {
+	    padding: 0 0 0 24px;	/* ラベルの位置 */
+	    font-size: 24px;
+	    line-height: 28px;		/* ボタンのサイズに合わせる */
+	    display: inline-block;
+	    cursor:	pointer;
+	    position: relative;
+    }
+    .radiobutton_mid label:before {
+	    content: '';
+	    width: 28px;		/* ボタンの横幅 */
+	    height: 28px;		/* ボタンの縦幅 */
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    background-color: #00f;
+	    border-radius: 50%;
+    }
+    .radiobutton_mid input[type="radio"] {
+	    display: none;
+    }
+    .radiobutton_mid input[type="radio"]:checked + label:after {
+	    content: '';
+	    width: 10px;		/* マークの横幅 */
+	    height: 10px;		/* マークの縦幅 */
+	    position: absolute;
+	    top: 9px;
+	    left: 9px;
+	    background-color: #fff;
+	    border-radius: 50%;
+    }           
+    .preview img {
+        width: 128px;
+    }
+
+/* Style for Slider */
+    dialog form, dialog datalist {
+        display: grid;
+    }
+    dialog form {
+        --k: calc((var(--val) - var(--min))/
+              (var(--max) - var(--min)));
+        --pos: calc(1.125em + var(--k)*(100% - 2.25em));
+        grid-gap: 0.25em;
+        place-self: center;
+        min-width: 8em;
+        width: calc(100% - 1.5em);
+        max-width: 90%;
+        filter: Saturate(var(--hl, 0));
+        transition: filter 0.3s ease-out;
+    }
+    dialog form:focus-within, dialog form:hover {
+        --hl: 1 ;
+    }
+  
+    dialog input[type=range] {
+        height: 2.25em;
+        width: 30em;
+        border-radius: 2.25em;
+        box-shadow: 0 -1px #eaeaea, 0 1px #fff;
+        background: linear-gradient(#c3c3c3, #f1f1f1);
+        cursor: pointer;
+    }
+    dialog input[type=range], dialog input[type=range]::-webkit-slider-runnable-track, dialog input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+    dialog input[type=range][list]::-webkit-slider-container {
+        min-height: 1.5em;
+    }
+    dialog input[type=range]::-webkit-slider-container {
+        -webkit-user-modify: read-write !important;
+        margin: 0.375em;
+        height: 1.5em;
+        border-radius: 0.75em;
+        box-shadow: inset 0 1px 4px #8c8c8c;
+        background: linear-gradient(#f83636, #d68706) 0/var(--pos) no-repeat, linear-gradient(#efefef, #c9c9c9);
+    }
+    dialog input[type=range]::-webkit-slider-runnable-track {
+        margin: -0.375em;
+    }
+    dialog input[type=range]::-moz-range-track {
+        margin: 0.375em;
+        height: 1.5em;
+        border-radius: 0.75em;
+        box-shadow: inset 0 1px 4px #8c8c8c;
+        background: linear-gradient(#f83636, #d68706) 0/var(--pos) no-repeat, linear-gradient(#efefef, #c9c9c9);
+    }
+    dialog input[type=range]::-webkit-slider-thumb {
+        box-sizing: border-box;
+        border: solid 0.375em transparent;
+        width: 2.25em;
+        height: 2.25em;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px #7d7d7d;
+        background: linear-gradient(#c5c5c5, whitesmoke) padding-box, linear-gradient(#fbfbfb, #c2c2c2) border-box;
+        cursor: ew-resize;
+    }
+    dialog input[type=range]::-moz-range-thumb {
+        box-sizing: border-box;
+        border: solid 0.375em transparent;
+        width: 2.25em;
+        height: 2.25em;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px #7d7d7d;
+        background: linear-gradient(#c5c5c5, whitesmoke) padding-box, linear-gradient(#fbfbfb, #c2c2c2) border-box;
+        cursor: ew-resize;
+    }
+    dialog input[type=range]:focus {
+        outline: none;
+    }
+  
+    dialog datalist {
+        grid-row: 1;
+        grid-template-columns: 3em 1fr 3em;
+        place-content: end center;
+        margin: 0 -0.375em;
+        color: #8c8c8c;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    dialog datalist::after {
+        place-self: end center;
+        margin-bottom: 3px;
+        width: min(12em, 100%);
+        min-height: 0.5em;
+        grid-area: 1/2;
+        background: linear-gradient(90deg, transparent 2px, #f02222 0) -1px/1em round;
+        clip-path: polygon(0 calc(100% - 1px), 0 100%, 100% 100%, 100% 0);
+        content: "";
+    }
+  

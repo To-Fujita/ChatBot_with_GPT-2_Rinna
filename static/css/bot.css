@@ -1,0 +1,148 @@
+/*  CSS for Chat Bot by T. Fujita 2021/5/10 */
+html {
+    font-size: 62.5%;
+}
+body {
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+    -webkit-text-size-adjust: 100%;
+    font-size: 2.0em;
+    background-color: #e5e5ff;
+}
+h1 {
+    background-color: #e5e5ff;
+    display: inline-block;
+    font-size: 2em;
+    margin: 0;
+    padding: 5px;
+}
+
+#chatbox {
+    margin-left: auto;
+    margin-right: auto;
+    width: 94%;
+    margin-top: 30px;
+}
+#userInput {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    margin-top: 100px;
+}
+#textInput {
+    width: 90%;
+    height: 1.5em;
+    border: none;
+    border-bottom: 3px solid black;
+    font-family: monospace;
+    font-size: 2em;
+}
+.userText {
+    color: white;
+    font-family: monospace;
+    font-size: 1.5em;
+    text-align: right;
+    line-height: 1.5em;
+}
+.userText span {
+    background-color: #636383;
+    padding: 10px;
+    border-radius: 2px;
+}
+.botText {
+    color: black;
+    font-family: monospace;
+    font-size: 1.5em;
+    text-align: left;
+    line-height: 1.5em;
+}
+.botText span {
+    background-color: #e5e5ff;
+    padding: 10px;
+    border-radius: 2px;
+}
+.boxed {
+    margin-left: auto;
+    margin-right: auto;
+    width: 94%;
+    height: 70vh;
+    margin-top: 10px;
+    border: 1px solid green;
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+.box {
+    border: 2px solid black;
+}
+input {
+    font-size: 0.7em;
+    margin: 0;
+    padding: 0px;
+    vertical-align:bottom;
+    text-align: left;
+}
+textarea {
+    font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+    font-size: 0.7em;
+    margin: 0;
+    padding: 0px;
+    vertical-align:bottom;
+    text-align: center;
+    height: 1.5em;
+}
+@media screen and (min-width:1024px) {
+    .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 94%;
+        height: 70vh;
+        margin-top: 10px;
+        border: 1px solid green;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }  
+}
+@media screen and (min-width:767px) and (max-width:1023px) {
+    .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 94%;
+        height: 70vh;
+        margin-top: 10px;
+        border: 1px solid green;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }  
+}
+@media screen and (max-width:767px) {
+    body{
+        font-size: 2em;
+    }
+    .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 94%;
+        height: 90vh;
+        margin-top: 10px;
+        border: 1px solid green;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+}
+
+@media screen and (max-width:480px) {
+    body{
+        font-size: 1.2em;
+    }
+    .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 94%;
+        height: 80vh;
+        margin-top: 10px;
+        border: 1px solid green;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+}
