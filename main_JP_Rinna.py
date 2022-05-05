@@ -1,4 +1,4 @@
-# ChatBot with GPT-2 Rinna, "main_JP_Rinna.py" by F. Fujita on 2022/05/04
+# ChatBot with GPT-2りんな, "main_JP_Rinna.py" by F. Fujita on 2022/05/04
 
 import random
 import difflib
@@ -148,6 +148,7 @@ def make_answer(tempText):
 
 # ChatBot
 def in_out(temp_text):
+    temp_text = temp_text.replace(' ', '')
     tokenizer = T5Tokenizer.from_pretrained(Model_file) 
     model = AutoModelForCausalLM.from_pretrained(Model_file)
     input = tokenizer.encode(temp_text, return_tensors="pt") 
@@ -156,8 +157,12 @@ def in_out(temp_text):
     temp_text = str(temp_reply[0])
     pos = temp_text.find('>')
     text_reply = temp_text[(pos + 1):]
-    pos = text_reply.rfind('、')
-    text_reply = text_reply[:(pos + 1)]
+    pos = text_reply.rfind('。')
+    if (pos > 1):
+        text_reply = text_reply[:(pos + 1)]
+    else:
+        pos = text_reply.rfind('、')
+        text_reply = text_reply[:(pos + 1)]
     
     return text_reply
 
