@@ -163,7 +163,8 @@ def in_out(temp_text):
     else:
         pos = text_reply.rfind('、')
         text_reply = text_reply[:(pos + 1)]
-    
+    if (text_reply == '' or text_reply == ' ' or text_reply == '　'):
+        text_reply = 'ごめんなさい。ちょっと寝てしまいましたわ。'
     return text_reply
 
 def init():
