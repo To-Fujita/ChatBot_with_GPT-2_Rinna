@@ -20,7 +20,7 @@ I have confirmed this Python Script on the above conditions only. I will show yo
 
 ### 4-1. Preparation
 (a) Download & unzip the file.  
-Please download following file and put these unzipped folder under the system path passed.
+Please download following file and put the unzipped folder under the system path passed.
 - ChatBot_with_GPT-2_Rinna: Please download from above "Code".
 
 (b) Install some libraries to your Python  
