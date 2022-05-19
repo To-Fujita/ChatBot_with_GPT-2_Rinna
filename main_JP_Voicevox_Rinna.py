@@ -17,7 +17,7 @@ Model_file='rinna/japanese-gpt2-xsmall'
 #Model_file='rinna/japanese-gpt2-medium'
 #Model_file='rinna/japanese-gpt-1b'
 
-CSV_file = './ChatBot_JP_GPT2/data/Talk_List.csv'
+CSV_file = './ChatBot_with_GPT-2_Rinna-main/data/Talk_List.csv'
 Unk_data= 'あのね、'
 app = Flask(__name__, static_url_path='/static')
 tokenizer = Tokenizer()
@@ -28,7 +28,7 @@ ai_ratio = 0.5
 text_length = 64
 Speaker_No = 0
 voice_count = 0
-filepath = './ChatBot_JP_GPT2/static/audio/audio'
+filepath = './ChatBot_with_GPT-2_Rinna-main/static/audio/audio'
 
 @app.route("/")
 # Display by the HTML
