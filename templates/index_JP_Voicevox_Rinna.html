@@ -1,0 +1,1118 @@
+<!-- Android では、Google Chromeの省電力設定を解除する必要があります。 -->
+<!DOCTYPE html>
+<html>
+  <title>Index_JP_Voicevox_Rinna.html for Chat Bot by T. Fujita 2022/05/19</title>
+
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="static/css/bot.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/dialog_001.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="static/js/encoding.min.js"></script>
+  </head>
+  <body>
+    <Center><h1>
+      <img src="/static/images/R_011_R.png" alt="CANDICE" style="width:50px;height:50px;vertical-align:bottom;"/>
+      日本語チャットボット／with Rinna & VOICEVOX
+      <img src="/static/images/R_012_R.png" alt="CANDICE" style="width:50px;height:50px;vertical-align:bottom;transform: scale(-1, 1);"/><br>
+      <div id="Wiki_Search">
+        <input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px;" value="サブ・ウインドウ：非表示" onclick="Wiki_Flag();">
+      </div>
+      <div id="Speech_Flag">
+        <input type="button" class="normalButton" style="position:absolute; top:60px; left:33%; font-size: 20px; background-color: #ff0000; " value="音声入力 OFF" onclick="OnButtonClick_01();">
+      </div>
+      <div id="Voice_Flag">
+        <input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff; " value="四国めたん（あまあま）" onclick="Dialog_open_VoiceOptions();">
+      </div>
+      <input type="button" class="normalButton" value="設　定" style="position:absolute; top:60px; right:30px; font-size: 20px;" onclick="Dialog_open_menu();"/>
+    </h1></Center>
+    <div class="box"></div>
+    <div class="boxed" style="position: absolute; top:120px; left:3%;">
+      <div>
+        <div id="chatbox">
+          <p class="botText">
+            <img src="./static/images/F021a_R.png" alt="BOT" style="width:50px;height:50px;vertical-align:bottom;"/>
+            <span>私はGPT-2りんなを使用したチャットボットです。　何か話しかけていただけますか？<br>
+              「使い方を教えて」で使い方を表示します。　なお、個人情報の入力にはご注意くださいませ！　
+              初めに「VOICEVOX」を起動しておいてください。また、返答まで時間がかかるのはお許し下さいね！💖
+            </span>
+          </p>
+        </div>
+        <div id="userInput">
+          <input id="textInput" type="text" name="msg" placeholder="Message" />
+        </div>
+      </div>
+    </div>
+
+<!-- Dialog_Menu -->
+<dialog dialog id="dialog_menu">
+    <center><font size="4" color="#fff">
+        ダイアログ（メニュー）
+    </font></center>
+    <hr>
+    <nav class="nav">
+      <ul class="nav__menu"><font size="2">
+        <li class="nav__menu-item"><a>Informations</a>
+            <ul class="nav__submenu">
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_information()">Information</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_manual()">Manual</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_profile()">Profile</a></li>
+            </ul>                
+        </li>
+        <li class="nav__menu-item"><a>Bot Options</a>
+            <ul class="nav__submenu">
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_botIcon()">Bot's Icon</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_botFile()">Icon from File</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_VoiceOptions()">Voice Options</a></li>
+            </ul>
+        </li>
+        <li class="nav__menu-item"><a>User Options</a>
+            <ul class="nav__submenu">
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_userIcon_Boy()">Boy's Icon</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_userIcon_Girl()">Girl's Icon</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_userFile()">Icon from File</a></li>
+            </ul>
+        </li>
+        <li class="nav__menu-item"><a>Other Options</a>
+            <ul class="nav__submenu">
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_CSV_Load()">会話データ読込</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_CSV_Save()">会話データ保存</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_log_Save()">会話ログの保存</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_Slider()">AI使用率設定</a></li>
+                <li class="nav__submenu-item"> <a href="javascript: Dialog_open_dummy()">Dummy</a></li>
+            </ul>
+        </li>
+      </font></ul>
+    </nav>
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_menu()">
+</dialog>
+
+<!-- Dialog Box for Information -->
+<dialog dialog id="dialog_information">
+    <center>
+        ダイアログ（Information）
+    </center>
+    <hr>
+・Microsoft Edge及びGoogle Chrome対応の<br>GPT-2りんなを使用したチャットボットです。<br><br>
+・『設定』から各種設定が可能です。<br><br>
+・『サブ・ウインドウ：表示』設定で、色々な情報が小さなウインドウに表示されます。<br><br>
+・ボットの声質変更、ボットとユーザのアイコンの変更、会話データの追加や変更、AI使用率の変更等が出来ます。<br>
+    <hr>
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_information()">
+</dialog>
+
+<!-- Dialog Box for Manual -->
+<dialog dialog id="dialog_manual">
+    <center>
+        ダイアログ（Manual）
+    </center>
+    <hr>
+    <center>
+    <textarea rows="10" cols="50" readonly style="resize: none; width:480px; height:250px; text-align: left;">
+・『サブ・ウインドウ：非表示』、『サブ・ウインドウ：表示』をクリックすることで、小さなウインドウの表示／非表示を制御できます。
+・「使用方法を教えて」や「使い方を教えて」と入力することで、使用方法が表示されます。
+・「何々を検索して」や「何々について検索して」、「何々について教えて」あるいは「何々とは何ですか」で、Wiki検索をします。
+・「今日の天気は」や「＊＊の天気を教えて」「＊＊の天気予報は」で、天気予報を表示します。（＊＊は国名や主要都市名等の地名です）
+・「今日のニュースは」や「今日の出来事は」で、RSSから何かニュースを拾ってきます。
+・占いや写真、映像、鳥や動物の鳴き声の検索も出来ますよ。（小ウインドウでリンクページを表示するだけですが！）
+・「メニューはあるの」や「メニューを出して」で、メニュー（各種設定、会話データの読込・保存等）を表示します。
+・「音声入力終了」や「音声認識終了」で、音声入力を終了します。
+・会話データ（Talk_Data.csv）については、次の通りです。
+ー CSVファイルとして、読込（任意のCSVファイル）および保存（Talk_Data.csv）ができます。
+ー CSVファイルは、エクセル等で作成・修正ができます。
+ー CSVファイルでは、A列にあなたの質問や会話を記述します。
+ー B列以降にチャットボットからの回答等を複数個記述するとランダムに選択して回答されます。
+ー チャットボットからの回答に「#NEWS#」があると、RSSから任意のニュースを読み込んで表示します。
+ー「#WEATHER#」があると天気予報を表示し、「#WIKI#」があるとウキペディアでの検索結果を表示します。
+ー「#FORTUNE#」、「#PHOTO#」、「#VIDEO#」があると、それぞれ占い、写真、ビデオ用の小ウィンドウを表示します。
+ー チャットボットからの回答に「#MENU#」があると、メニューを表示します。
+    </textarea>
+    </center>
+    <hr>
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_manual()">
+</dialog>
+
+<!-- Dialog Box for Profile -->
+<dialog dialog id="dialog_profile">
+    <center>
+        ダイアログ（Profile）
+    </center>
+    <hr>
+    <div class="profile_wrapper">
+        <div class="card">
+            <div class="me">
+                <div class="eye"></div>
+            </div>
+            <div class="text">
+                 HAL bou
+            </div>
+        </div>
+    </div>
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_profile()">
+</dialog>
+
+<!-- Select Bot Icon -->
+<dialog dialog id="dialog_botIcon">
+    <center>
+        ダイアログ（Select Bot Icon）
+    </center>
+    <hr>
+    <div class="radiobutton">
+        <input type="radio" id="radio1" name="Dialog_radio_bot" value="/static/images/F021a_R.png" checked>
+        <label for="radio1">　<img border="1" src="/static/images/F021a_R.png" width="64" height="64" alt="イラスト1"></label><br>
+        <input type="radio" id="radio2" name="Dialog_radio_bot" value="/static/images/R_011_R.png">
+        <label for="radio2">　<img border="1" src="/static/images/R_011_R.png" width="64" height="64" alt="イラスト2"></label><br>
+        <input type="radio" id="radio3" name="Dialog_radio_bot" value="/static/images/R_012_R.png">
+        <label for="radio3">　<img border="1" src="/static/images/R_012_R.png" width="64" height="64" alt="イラスト3"></label><br>
+    </div>
+    <hr>
+    <div class="radiobutton_mid" style="top: -238px;">
+        <input type="radio" id="radio4" name="Dialog_radio_bot" value="/static/images/R_017_R.png">
+        <label for="radio4">　<img border="1" src="/static/images/R_017_R.png" width="64" height="64" alt="イラスト4"></label><br>
+        <input type="radio" id="radio5" name="Dialog_radio_bot" value="/static/images/R_015_R.png">
+        <label for="radio5">　<img border="1" src="/static/images/R_015_R.png" width="64" height="64" alt="イラスト5"></label><br>
+    </div>
+    <input type="button" class="leftButton" value="キャンセル" onclick="Dialog_cancel_botIcon()">           
+    <input type="button" class="rightButton" value="決　定" onclick="Dialog_close_botIcon()">
+</dialog>
+
+<!-- Select User Icon Boy -->
+<dialog dialog id="dialog_userIcon_Boy">
+    <center>
+        ダイアログ（Select User Icon/Boy）
+    </center>
+    <hr>
+    <div class="radiobutton">
+        <input type="radio" id="radio11" name="Dialog_radio_user_Boy" value="/static/images/M004_La.png" checked>
+        <label for="radio11">　<img border="1" src="/static/images/M004_La.png" width="64" height="64" alt="イラスト1"></label><br>
+        <input type="radio" id="radio12" name="Dialog_radio_user_Boy" value="/static/images/M008_L.png">
+        <label for="radio12">　<img border="1" src="/static/images/M008_L.png" width="64" height="64" alt="イラスト2"></label><br>
+        <input type="radio" id="radio13" name="Dialog_radio_user_Boy" value="/static/images/M011_L.png">
+        <label for="radio13">　<img border="1" src="/static/images/M011_L.png" width="64" height="64" alt="イラスト3"></label><br>
+    </div>
+    <hr>
+    <div class="radiobutton_mid" style="top: -238px;">
+        <input type="radio" id="radio14" name="Dialog_radio_user_Boy" value="/static/images/M012_L.png">
+        <label for="radio14">　<img border="1" src="/static/images/M012_L.png" width="64" height="64" alt="イラスト4"></label><br>
+        <input type="radio" id="radio15" name="Dialog_radio_user_Boy" value="/static/images/M026_La.png">
+        <label for="radio15">　<img border="1" src="/static/images/M026_La.png" width="64" height="64" alt="イラスト5"></label><br>
+    </div>
+    <input type="button" class="leftButton" value="キャンセル" onclick="Dialog_cancel_userIcon_Boy()">           
+    <input type="button" class="rightButton" value="決　定" onclick="Dialog_close_userIcon_Boy()">
+</dialog>
+
+<!-- Select User Icon Girl -->
+<dialog dialog id="dialog_userIcon_Girl">
+    <center>
+        ダイアログ（Select User Icon/Girl）
+    </center>
+    <hr>
+    <div class="radiobutton">
+        <input type="radio" id="radio21" name="Dialog_radio_user_Girl" value="/static/images/F003_L.png" checked>
+        <label for="radio21">　<img border="1" src="/static/images/F003_L.png" width="64" height="64" alt="イラスト1"></label><br>
+        <input type="radio" id="radio22" name="Dialog_radio_user_Girl" value="/static/images/F007_L.png">
+        <label for="radio22">　<img border="1" src="/static/images/F007_L.png" width="64" height="64" alt="イラスト2"></label><br>
+        <input type="radio" id="radio23" name="Dialog_radio_user_Girl" value="/static/images/F014_L.png">
+        <label for="radio23">　<img border="1" src="/static/images/F014_L.png" width="64" height="64" alt="イラスト3"></label><br>
+    </div>
+    <hr>
+    <div class="radiobutton_mid" style="top: -238px;">
+        <input type="radio" id="radio24" name="Dialog_radio_user_Girl" value="/static/images/F019_L.png">
+        <label for="radio24">　<img border="1" src="/static/images/F019_L.png" width="64" height="64" alt="イラスト4"></label><br>
+        <input type="radio" id="radio25" name="Dialog_radio_user_Girl" value="/static/images/F047_L.png">
+        <label for="radio25">　<img border="1" src="/static/images/F047_L.png" width="64" height="64" alt="イラスト5"></label><br>
+    </div>
+    <input type="button" class="leftButton" value="キャンセル" onclick="Dialog_cancel_userIcon_Girl()">           
+    <input type="button" class="rightButton" value="決　定" onclick="Dialog_close_userIcon_Girl()">
+</dialog>
+
+<!-- Icon Load form File -->
+<dialog dialog id="dialog_imageFile">
+    <center>
+        ダイアログ（File Input Image File）
+    </center>
+    <hr>
+    <span id="image_File" style="font-size: 16px;">　Bot用画像ファイルの選択：　</span>
+    <form name="photoinput_image">
+        <center>　
+            <input type="file" accept="image/*" name="select_imageFile" id="select_imageFile" value="" onchange="updateImageDisplay_File()">
+            <div class="preview">
+                <p>Photo File is not selected.</p>
+            </div>
+        </center>
+    </form>
+    <input type="button" class="leftButton" value="キャンセル" onclick="Dialog_cancel_imageFile()">           
+    <input type="button" class="rightButton" value="決　定" onclick="Dialog_close_imageFile()">
+</dialog>
+
+<!-- CSV File Loading -->
+<dialog dialog id="dialog_CSV_Load">
+    <center>
+        ダイアログ（CSV File Loading）
+    </center>
+    <hr>
+    <span style="font-size: 16px;">　CSV ファイルの選択：　</span>
+    <center>
+        <input type="file" accept=".csv" name="dialog_CSV" id="dialog_CSV" value=""><hr>
+        <div style="width:480px; height:150px; white-space: nowrap; overflow: scroll;">
+            <table border="1" id="dialog_CSV_DSP" style="font-size: 14px;"></table>
+        </div>
+    </center>
+    <hr>
+    <input type="button" class="leftButton" value="キャンセル" onclick="Dialog_cancel_CSV_Load()">
+    <input type="button" class="normalButton" value="新規読込" style="position:absolute; bottom:2px; left:250px;" onclick="Dialog_close_CSV_Load_New()">
+    <input type="button" class="rightButton" value="追加読込" onclick="Dialog_close_CSV_Load_Add()">
+</dialog>
+
+<dialog dialog id="dialog_CSV_Save">
+    <center>
+        ダイアログ（CSV Save/Shift-JIS）
+    </center>
+    <hr>
+    <span style="font-size: 16px;">　CSVファイルの保存：　</span>
+    <center>
+        <div style="width:480px; height:220px; white-space: nowrap; overflow:scroll;">
+            <table border="1" id="dialog_CSV_Save_SJIS" style="font-size: 14px;"></table>
+        </div>
+    </center>
+    <hr>
+    <input type="button" class="leftButton" value="キャンセル" onclick="Dialog_cancel_CSV_Save()"> 
+    <a class="rightButton" id="csv_download_SJIS" style="font-size: 18px;" href="#" download="Talk_Data.csv" onclick="Dialog_close_CSV_Save()">ファイル保存</a>
+</dialog>
+
+<!-- Dialog Box for Slider -->
+<dialog dialog id="dialog_Slider">
+    <center>
+        ダイアログ（AI使用率設定）
+    </center>
+    <hr>
+    <form style="--min: 0; --max: 100; --val: 50; position: absolute; top: 25%;">
+        <input type="range" id="Range" min="0" max="100" value="50" list="l" onchange="showValue()"/>
+        <datalist id="l">
+          <option label="min" value="0"></option>
+          <option label="max" value="100"></option>
+        </datalist>
+    </form>
+    <span id="Slider" style="position:absolute; top:60%; left:40%; color:#000000">AI使用率= 50 %</span>            
+    <br><br><br>
+    <br><br><br>
+    <hr>
+    <input type="button" class="rightButton" value="決定" onclick="Dialog_close_Slider()">
+</dialog>
+
+<!-- Dialog Box for Show Wiki -->
+<dialog dialog id="dialog_wiki">
+    <center>
+        ダイアログ（Show WIKI）
+    </center>
+    <hr>
+    <div id="show_wiki">
+        <iframe src="https://ja.wikipedia.org/wiki/ウィキペディア" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
+    </div>
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_wiki()">
+</dialog>
+
+<!-- Dialog Box for Show Fortune -->
+<dialog dialog id="dialog_fortune">
+    <center>
+        ダイアログ（Show Fortune）
+    </center>
+    <hr>
+    <div id="show_fortune">
+        <iframe src="https://https://fortune.yahoo.co.jp/12astro/index.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
+    </div>
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_fortune()">
+</dialog>
+
+<!-- Dialog Box for Show Picture -->
+<dialog dialog id="dialog_picture">
+    <center>
+        ダイアログ（Show Picture by Bing）
+    </center>
+    <hr>
+    <div id="show_picture">
+        <iframe src="https://www.bing.com/images/search?q=人間" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
+    </div>
+    <input type="button" class="leftButton" value="Googleで検索" onclick="Google_picture()">
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_picture()">
+</dialog>
+
+<!-- Dialog Box for Show Video -->
+<dialog dialog id="dialog_video">
+    <center>
+        ダイアログ（Show Video by Bing）
+    </center>
+    <hr>
+    <div id="show_video">
+        <iframe src="https://www.bing.com/videos/search?q=人間" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
+    </div>
+    <input type="button" class="leftButton" value="Googleで検索" onclick="Google_picture()">
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_video()">
+</dialog>
+
+<!-- Dialog Box for Call -->
+<dialog dialog id="dialog_call">
+    <center>
+        ダイアログ（Call by Suntory）
+    </center>
+    <hr>
+    <div id="show_call">
+        <iframe src="https://www.suntory.co.jp/eco/birds/encyclopedia/nakigoe.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
+    </div>
+    <input type="button" class="leftButton" value="東京ズーネットで検索" onclick="TokyoZooNet()">
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_call()">
+</dialog>
+
+<!-- Dialog Box for Voice Options -->
+<dialog dialog id="dialog_VoiceOptions">
+    <center>
+        ダイアログ（Voice Options）
+    </center>
+    <hr>
+    <center>
+        <select size="10" name="voice-select" id="selectVoice">
+        <option value = "0" selected>0:四国めたん（あまあま）</option>
+        <option value = "1">1:ずんだもん（あまあま）</option>
+        <option value = "2">2:四国めたん（ノーマル）</option>
+        <option value = "3">3:ずんだもん（ノーマル）</option>
+        <option value = "4">4:四国めたん（セクシー）</option>
+        <option value = "5">5:ずんだもん（セクシー）</option>
+        <option value = "6">6:四国めたん（ツンツン）</option>
+        <option value = "7">7:ずんだもん（ツンツン）</option>
+        <option value = "8">8:春日部つむぎ（ノーマル）</option>
+        <option value = "9">9:波音リツ（ノーマル）</option>
+        <option value = "10">10:雨晴はう（ノーマル）</option>
+        <option value = "11">11:玄野武宏（ノーマル）</option>
+        <option value = "12">12:白上虎太郎（ノーマル）</option>
+        <option value = "13">13:青山龍星（ノーマル）</option>
+        <option value = "14">14:冥鳴ひまり（ノーマル）</option>
+        <option value = "15">15:九州そら（あまあま）</option>
+        <option value = "16">16:九州そら（ノーマル）</option>
+        <option value = "17">17:九州そら（セクシー）</option>
+        <option value = "18">18:九州そら（ツンツン）</option>
+        <option value = "19">19:九州そら（ささやき）</option>
+        </select>
+        <br/><br/>
+    </center>
+    <hr>
+    <input type="button" class="leftButton" value="キャンセル" onclick="Dialog_cancel_VoiceOptions()">
+    <input type="button" class="rightButton" value="決　定" onclick="Dialog_close_VoiceOptions()">
+</dialog>
+
+<!-- Dialog Box for Weather -->
+<dialog dialog id="dialog_weather">
+    <center>
+        ダイアログ（Show Weather）
+    </center>
+    <hr>
+    <div id="show_weather">
+        <iframe src="https://tenki.jp" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
+    </div>
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_weather()">
+</dialog>
+
+<dialog dialog id="dialog_log_Save">
+    <center>
+        ダイアログ（Log Save/Shift-JIS）
+    </center>
+    <hr>
+    <span style="font-size: 16px;">　会話ログの保存：　</span>
+    <center>
+        <div style="width:480px; height:220px; white-space: nowrap; overflow:scroll;">
+            <table border="1" id="dialog_log_Save_SJIS" style="font-size: 14px;"></table>
+        </div>
+    </center>
+    <hr>
+    <input type="button" class="leftButton" value="キャンセル" onclick="Dialog_cancel_log_Save()"> 
+    <a class="rightButton" id="log_download_SJIS" style="font-size: 18px;" href="#" download="Log_Data.csv" onclick="Dialog_close_log_Save()">ファイル保存</a>
+</dialog>
+
+<!-- Dialog Box for Dummy -->
+<dialog dialog id="dialog_dummy">
+    <center>
+        ダイアログ（Dummy）
+    </center>
+    <hr>
+・これは、ダミー・ウィンドウです。<br>
+    <br><br>
+    <br><br>
+    <hr>
+    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_dummy()">
+</dialog>
+
+
+    <script>
+        let bot_icon = "/static/images/F021a_R.png"
+        let user_icon = "/static/images/M008_L.png"
+        let Speak = document.getElementById('Speech_Flag');
+        let Voice = document.getElementById('Voice_Flag');
+        let Flag_Speech = 0;
+        let image;
+        let image_Flag = 0;
+        let log_data = new Array();
+        let File_Input_Title = document.getElementById('image_File');
+        const voiceSelect = document.getElementById('selectVoice');
+
+        SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
+        let recognition = new SpeechRecognition();
+        recognition.lang = 'ja-JP';
+        recognition.interimResults = false;
+        recognition.continuous = true;
+        let temp_word;
+        let sound = new Audio();
+
+
+        var rangeValue = function (elem, target) {
+            return function(evt) {
+                target.innerHTML = elem.value
+            }
+        }
+
+// 音声入力、音声認識のON/OFF設定
+        function OnButtonClick_01() {
+            if (Flag_Speech == 1) {
+                Flag_Speech = 0;
+                VoiceInputOff();
+            }
+            else {
+                Flag_Speech = 1;
+                VoiceInputOn();
+            }
+        }
+        function VoiceInputOff() {  
+            Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:33%; font-size: 20px; background-color: #ff0000;" value="音声入力 OFF" onclick="OnButtonClick_01();">';
+            recognition.stop();
+        }
+        function VoiceInputOn() {
+            Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:33%; font-size: 20px;" value="音声入力 ON " onclick="OnButtonClick_01();">';
+            recognition.start();
+        }
+
+// Python とのやり取り
+        function getBotResponse() {
+          VoiceInputOff();
+          var rawText = $("#textInput").val();
+          var userHtml = '<p class="userText"><span>' + rawText + 
+            '</span><img src=' + user_icon + ' alt="USER" style="width:50px;height:50px;vertical-align:bottom;"/></p>';
+          $("#textInput").val("");
+          $("#chatbox").append(userHtml);
+          document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
+          $.get("/get", { msg: rawText }).done(function(data) {
+            var weather_no = data.indexOf('https://tenki.jp');
+            if (weather_no > 0) {
+                temp = data;
+                temp_word = temp.substr( 0, weather_no );
+                temp_url = temp.substr( weather_no );
+                data = temp_word;
+                Dialog_open_weather(temp_url);
+            }
+            var Temp = data.replace(/\n/g, '<br>');
+            var botHtml = '<p class="botText"><img src=' + bot_icon + ' alt="BOT" style="width:50px;height:50px;vertical-align:bottom;"/><span>' + Temp + '</span></p>';
+            $("#chatbox").append(botHtml);
+            
+            var temp_no_00 = data.indexOf('音声入力を終了しました。')
+            if (temp_no_00 > 0) {
+                VoiceInputOff();
+            }
+           var temp_no_01 = data.indexOf('占いを表示します。')
+            if (temp_no_01 > 0) {
+                Dialog_open_fortune('#Fortune#');
+            }
+            var temp_no_02 = data.indexOf('の検索結果');
+            if (temp_no_02 > 0) {
+                temp_word = data.substr(5, (temp_no_02 - 5));
+                Dialog_open_wiki(temp_word);
+            }
+            var photo_no = data.indexOf('の画像を表示します。');
+            if (photo_no > 0) {
+                temp_word = data.substr(5, (photo_no - 5));
+                Dialog_open_picture(temp_word);
+            }
+            var video_no = data.indexOf('のビデオを表示します。');
+            if (video_no > 0) {
+                temp_word = data.substr(5, (video_no - 5));
+                Dialog_open_video(temp_word);
+            }
+            var call_no = data.indexOf('ですね、鳥以外には対応していません。');
+            if (call_no > 0) {
+                temp_word = data.substr(5, (call_no - 5));
+                Dialog_open_call(temp_word);
+            }
+            speech(data);
+            log_data.push([rawText, data]);
+            document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
+
+          });
+        }
+
+// 音声合成での発声（VoiceVox）
+        function speech(answer) {
+            voice_count = answer.substr(0, 4);
+            sound.preload = "none";
+            sound.src = "static/audio/audio" + voice_count + ".wav";
+            sound.load();
+            sound.loop = false;
+            sound.autoplay = true;
+            VoiceInputOff();
+            sound.play();
+            sound.addEventListener("ended", function() {
+                if (Flag_Speech == 1) {
+                    VoiceInputOn();
+                }
+            }, false);
+        }
+
+// 音声認識処理
+        recognition.onresult = (event) => {
+          let interimTranscript = '';     // 暫定の認識結果（Androidでは、うまく機能しない）
+          let finalTranscript = '';       // 確定した認識結果
+          let question = '';
+          if (Flag_Speech == 0) {
+            answer = null;
+            return;
+          }      
+          for (let i = event.resultIndex; i < event.results.length; i++) {
+            if (event.results[i].isFinal) {
+              finalTranscript = event.results[i][0].transcript;
+            } else {
+              interimTranscript = '';
+            }
+          }
+          question = finalTranscript;
+          if (question.length > 0) {
+            if (question != undefined) {
+              document.getElementById("textInput").value = question;
+              getBotResponse();
+            }
+          }        
+        }
+
+// Return Key 入力時の処理
+        $("#textInput").keypress(function(e) {
+          if (e.which == 13) {
+            getBotResponse();
+          }
+        });
+
+// for Dialog Box
+        function Dialog_open_menu() {
+            dialog_menu.showModal();
+        }
+        function Dialog_close_menu() {
+            dialog_menu.close();
+        }
+
+        function Dialog_open_manual() {
+            dialog_menu.close();
+            dialog_manual.showModal();
+        }
+        function Dialog_close_manual() {
+            dialog_manual.close();
+        }
+
+        function Dialog_open_information() {
+            dialog_menu.close();
+            dialog_information.showModal();
+        }
+        function Dialog_close_information() {
+            dialog_information.close();
+        }
+
+        function Dialog_open_profile() {
+            dialog_menu.close();
+            dialog_profile.showModal();
+        }
+        function Dialog_close_profile() {
+            dialog_profile.close();
+        }
+
+// for Profile Wrapper
+        var $wrap = $('.profile_wrapper'),
+            $lEye = $('.eye'),
+            lFollowX = 5,
+            lFollowY = 10,
+            x = 0,
+            y = 0,
+            friction = 1 / 12;
+
+        function animate() {
+            x += (lFollowX - x) * friction;
+            y += (lFollowY - y) * friction;
+            $lEye.css({
+                '-webit-transform': 'translate(' + -x + 'px, ' + -y + 'px)',
+                '-moz-transform': 'translate(' + -x + 'px, ' + -y + 'px)',
+                'transform': 'translate(' + -x + 'px, ' + -y + 'px)' 
+            });
+            $wrap.css({
+                'transform': 'translate(-50%, -50%) perspective(600px) rotateY(' + -x + 'deg) rotateX(' + y + 'deg)' 
+            });
+            window.requestAnimationFrame(animate);
+        }
+
+        $(window).on('mousemove click', function (e) {
+            var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+            var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+            lFollowX = 12 * lMouseX / 100;          // 100 : 12 = lMouxeX : lFollow
+            lFollowY = 10 * lMouseY / 100;
+        });
+        animate();
+
+// Select Bot Icon
+        function Dialog_open_botIcon() {
+            dialog_menu.close();
+            dialog_botIcon.showModal();
+        }
+        function Dialog_cancel_botIcon() {
+            dialog_botIcon.close();
+        }
+        function Dialog_close_botIcon() {
+            var elements = document.getElementsByName('Dialog_radio_bot');
+            var len = elements.length;
+            var checkValue = '';
+
+            for (let i = 0; i < len; i++){
+                if (elements.item(i).checked){
+                    checkValue = elements.item(i).value;
+                }
+            }
+            bot_icon = checkValue;
+            dialog_botIcon.close();
+        }
+
+// Select User Icon (Boy)
+        function Dialog_open_userIcon_Boy() {
+            dialog_menu.close();
+            dialog_userIcon_Boy.showModal();
+        }
+        function Dialog_cancel_userIcon_Boy() {
+            dialog_userIcon_Boy.close();
+        }
+        function Dialog_close_userIcon_Boy() {
+            var elements = document.getElementsByName('Dialog_radio_user_Boy');
+            var len = elements.length;
+            var checkValue = '';
+
+            for (let i = 0; i < len; i++){
+                if (elements.item(i).checked){
+                checkValue = elements.item(i).value;
+                }
+            }
+            user_icon = checkValue;
+            dialog_userIcon_Boy.close();
+        }
+
+// Select User Icon (Girl)
+        function Dialog_open_userIcon_Girl() {
+            dialog_menu.close();
+            dialog_userIcon_Girl.showModal();
+        }
+        function Dialog_cancel_userIcon_Girl() {
+            dialog_userIcon_Girl.close();
+        }
+        function Dialog_close_userIcon_Girl() {
+            var elements = document.getElementsByName('Dialog_radio_user_Girl');
+            var len = elements.length;
+            var checkValue = '';
+
+            for (let i = 0; i < len; i++){
+                if (elements.item(i).checked){
+                    checkValue = elements.item(i).value;
+                }
+            }
+            user_icon = checkValue;
+            dialog_userIcon_Girl.close();
+        }
+
+        function Dialog_open_botFile() {
+            image_Flag = 0;
+            File_Input_Title.innerHTML = "　Bot用画像ファイルの選択：　";
+            dialog_menu.close();
+            dialog_imageFile.showModal();
+        }
+
+        function Dialog_open_userFile() {
+            image_Flag = 1;
+            File_Input_Title.innerHTML = "　User用画像ファイルの選択：　";
+            dialog_menu.close();
+            dialog_imageFile.showModal();
+        }
+
+        function Dialog_close_imageFile() {
+            if (image_Flag == 0) {
+                bot_icon = image.src;
+            }
+            else {
+                user_icon = image.src;
+            }
+            dialog_imageFile.close();
+        }
+        function Dialog_cancel_imageFile() { 
+            dialog_imageFile.close();
+        }
+// Load Image File
+        function updateImageDisplay_File() {
+            var preview = document.querySelector('.preview');
+            var file_input = $('#select_imageFile');
+            var file = file_input[0].files[0];
+            var para = document.createElement('p');
+            if(file === undefined) {
+                para.textContent = 'Photo File is not selected!';
+                preview.removeChild(preview.childNodes.item(0));
+                preview.appendChild(para);
+            } else {
+                while(preview.firstChild){
+                    preview.removeChild(preview.firstChild);
+                }
+                preview.appendChild(para);
+                image = document.createElement('img');
+                image.src = window.URL.createObjectURL(file);
+                preview.appendChild(image);
+            }
+        }
+// Load CSV Data
+        var CSV_Temp_Data = "";
+        var CSV_Data = "";
+        var Text_Box_CSV = document.getElementById('dialog_DSP')
+        function Dialog_open_CSV_Load() {
+            dialog_menu.close();
+            dialog_CSV_Load.showModal();
+            Dialog_CSV_Data_Load();
+        }
+        function Dialog_cancel_CSV_Load() {
+            dialog_CSV_Load.close();
+        }
+        function Dialog_close_CSV_Load_New() {
+            CSV_Data = CSV_Temp_Data;
+            $.get("/get_New", { new_CSV: CSV_Data }).done(function( data ) {
+                var temp = data;
+            }).fail(function(){
+            alert('failed');
+            });
+            dialog_CSV_Load.close();
+        }
+        function Dialog_close_CSV_Load_Add() {
+            CSV_Data = CSV_Temp_Data;
+            $.get("/get_Add", { add_CSV: CSV_Data }).done(function( data ) {
+                var temp = data;
+            }).fail(function(){
+                alert('failed');
+            });
+            dialog_CSV_Load.close();
+        }
+        function Dialog_CSV_Data_Load() {
+            var select = document.getElementById('dialog_CSV');
+            var output_csv = document.getElementById('dialog_CSV_DSP');
+            select.value = "";
+            output_csv.innerHTML = "";
+            if(window.File) {
+                select.addEventListener('change', function(e) {
+                    var fileData = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onerror = function() {
+                        alert('ファイル読み取りに失敗しました')
+                    }
+                    reader.onload = function(event) {
+                        var tmp = new Uint8Array(event.target.result);
+                        var tmp_text = Encoding.convert(tmp, 'UNICODE', 'AUTO');
+                        CSV_Temp_Data = Encoding.codeToString(tmp_text);
+                        var insertElement = CSV_Temp_Data.replace(/\n/g, '<br>')
+                        output_csv.innerHTML = insertElement;
+                    }
+                    reader.readAsArrayBuffer(fileData);
+                }, false);
+            }
+        }
+
+// Save CSV Data
+        var Save_CSV_SJIS = new Array();
+        var dialog_CSV_Save_SJIS = document.getElementById('dialog_CSV_Save_SJIS');
+        function Dialog_open_CSV_Save() {
+            dialog_menu.close();
+            dialog_CSV_Save.showModal();
+            $.get("/get_Save", { save_CSV: "CSV_Save" }).done(function( data ) {
+                Save_CSV_SJIS = data;
+                var insertElement = Save_CSV_SJIS.replace(/\n/g, "<br>");
+                dialog_CSV_Save_SJIS.innerHTML = insertElement;
+            }).fail(function(){
+            alert('failed');
+            });
+        }
+        function Dialog_cancel_CSV_Save() {
+            dialog_CSV_Save.close();
+        }
+        function Dialog_close_CSV_Save() {
+            CSV_Data_Save_SJIS()
+            dialog_CSV_Save.close();
+        }
+        function CSV_Data_Save_SJIS() {
+            var content = Save_CSV_SJIS;
+            var strArray = Encoding.stringToCode(content);
+            var convertedArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
+            var UintArray = new Uint8Array(convertedArray);
+            var blob = new Blob([UintArray], { type: 'text/csv' });
+            if (window.navigator.msSaveBlob) { 
+                window.navigator.msSaveBlob(blob, "Talk_Data.csv"); 
+                // msSaveOrOpenBlobの場合はファイルを保存せずに開ける
+                window.navigator.msSaveOrOpenBlob(blob, "Talk_Data.csv"); 
+            } else {
+                document.getElementById("csv_download_SJIS").href = window.URL.createObjectURL(blob);
+            }
+        }
+
+// for AI使用率
+        function Dialog_open_Slider() {
+            dialog_menu.close();
+            dialog_Slider.showModal();            
+        }
+        var slider_Val =document.getElementById('Slider');
+        var range_Val = document.getElementById('Range');
+        var temp_text;
+        function Dialog_close_Slider() {
+            temp_text = range_Val.value;
+            $.get("/get_AI_Ratio", { AI_Ratio: temp_text }).done(function( data ) {
+                temp_text = data
+            }).fail(function(){
+                alert('failed');
+            });
+           
+            dialog_Slider.close();            
+        }
+        document.documentElement.classList.add('js');
+        addEventListener('input', e => {
+            let _t = e.target;
+             _t.parentNode.style.setProperty('--val', +_t.value);
+        }, false);
+
+        function showValue(){
+            slider_Val.innerHTML = "AI使用率= " + range_Val.value + " %";
+        } 
+
+// Show Wikipedia
+        var wiki_flag = 0;
+        var wiki_search = document.getElementById('Wiki_Search')
+        function Wiki_Flag() {
+            if (wiki_flag == 0) {
+                wiki_flag = 1;
+                wiki_search.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color:#ff0000;" value="サブ・ウインドウ：　表示" onclick="Wiki_Flag();">';
+            } else {
+                wiki_flag = 0;
+                wiki_search.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px;" value="サブ・ウインドウ：非表示" onclick="Wiki_Flag();">';
+            }
+        }
+        function Dialog_open_wiki(temp) {
+            if (temp == "" || wiki_flag == 0) {
+                return
+            }
+            show_HTML = document.getElementById("show_wiki");
+            show_HTML.innerHTML = '<iframe src="https://ja.wikipedia.org/wiki/' + temp + '" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
+            dialog_wiki.showModal();
+        }
+        function Dialog_close_wiki() {
+            dialog_wiki.close();
+        }
+
+// Show Fortune
+        function Dialog_open_fortune(temp) {
+            if (temp != '#Fortune#' || wiki_flag == 0) {
+                return
+            }
+            show_HTML = document.getElementById("show_fortune");
+            temp = 10 * Math.random();
+            if (temp < 3) {
+                show_HTML.innerHTML = '<iframe src="https://fortune.yahoo.co.jp/12astro/index.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
+            }
+            else if (temp < 6) {
+                show_HTML.innerHTML = '<iframe src="https://fortune.yahoo.co.jp/omikuji/index.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
+            }
+            else {
+                show_HTML.innerHTML = '<iframe src="https://fortune.yahoo.co.jp/toyo/index.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
+            }
+            dialog_fortune.showModal();
+        }
+        function Dialog_close_fortune() {
+            dialog_fortune.close();
+        }
+
+// Show Picture
+        function Dialog_open_picture(temp) {
+            if (temp == "" || wiki_flag == 0) {
+                return
+            }
+            show_HTML = document.getElementById("show_picture");
+            show_HTML.innerHTML = '<iframe src="https://www.bing.com/images/search?q=' + temp + '" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
+            dialog_picture.showModal();
+        }
+        function Dialog_close_picture() {
+            dialog_picture.close();
+        }
+        function Google_picture() {
+            window.open('https://www.google.com/search?q='+ temp_word, 'small_window', 'width=500,height=400,scrollbars=yes,resizable=yes'); return false;
+        }
+
+// Show Video
+        function Dialog_open_video(temp) {
+            if (temp == "" || wiki_flag == 0) {
+                return
+            }
+            show_HTML = document.getElementById("show_video");
+            show_HTML.innerHTML = '<iframe src="https://www.bing.com/videos/search?q=' + temp + '" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
+            dialog_video.showModal();
+        }
+        function Dialog_close_video() {
+            dialog_video.close();
+        }
+
+// Call
+        function Dialog_open_call(temp) {
+            if (temp == "" || wiki_flag == 0) {
+                return
+            }
+            show_HTML = document.getElementById("show_call");
+            show_HTML.innerHTML = '<iframe src="https://www.suntory.co.jp/eco/birds/encyclopedia/nakigoe.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
+            dialog_call.showModal();
+        }
+        function Dialog_close_call() {
+            dialog_call.close();
+        }
+        function TokyoZooNet() {
+            window.open('https://www.tokyo-zoo.net/cry/index.html', 'small_window', 'width=500,height=400,scrollbars=yes,resizable=yes'); return false;
+        }
+
+// Voice Options
+        var temp_voice = "";
+        voiceSelect.onchange = function(){
+            temp_voice = this.value;
+        }
+        function Dialog_open_VoiceOptions() {
+            dialog_menu.close();
+            dialog_VoiceOptions.showModal();
+        }
+        function Dialog_close_VoiceOptions() {
+            temp_text = String(temp_voice);
+            $.get("/get_Voice", { Voice_No: temp_text }).done(function( data ) {
+                temp_text = data
+            }).fail(function(){
+                alert('failed');
+            });
+            Show_Voice();
+            dialog_VoiceOptions.close();
+        }
+        function Dialog_cancel_VoiceOptions() {
+            dialog_VoiceOptions.close();
+        }
+        function Show_Voice() {
+            Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="四国めたん（あまあま）" onclick="Dialog_open_VoiceOptions();">';
+            if (temp_voice == 1) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="ずんだもん（あまあま）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 2) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="四国めたん（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 3) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="ずんだもん（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 4) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="四国めたん（セクシー）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 5) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="ずんだもん（セクシー）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 6) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="四国めたん（ツンツン）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 7) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="ずんだもん（ツンツン）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 8) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="春日部つむぎ（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 9) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="波音リツ（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 10) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="雨晴はう（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 11) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="玄野武宏（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 12) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="白上虎太郎（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 13) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="青山龍星（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 14) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="冥鳴ひまり（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 15) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="九州そら（あまあま）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 16) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="九州そら（ノーマル）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 17) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="九州そら（セクシー）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 18) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="九州そら（ツンツン）" onclick="Dialog_open_VoiceOptions();">';
+            } else if (temp_voice == 19) {
+                Voice.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:56%; font-size: 20px; background-color: #0000ff;" value="九州そら（ささやき）" onclick="Dialog_open_VoiceOptions();">';
+          }
+        }
+     
+
+// Show Weather
+        function Dialog_open_weather(temp) {
+            if (wiki_flag == 0){
+                return;
+            }
+            dialog_menu.close();
+            show_HTML = document.getElementById("show_weather");
+            show_HTML.innerHTML = '<iframe src="' + temp + '" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
+            dialog_weather.showModal();
+        }
+        function Dialog_close_weather() {
+            dialog_weather.close();
+        }
+
+// Save Log Data
+        function Dialog_open_log_Save() {
+            var dialog_log_SJIS = document.getElementById('dialog_log_Save_SJIS');
+            var insertElement = '';
+            dialog_menu.close();
+            dialog_log_Save.showModal();
+            for (var i=0; i<log_data.length; i++) {
+                insertElement += '<tr>';
+				    for (var j=0; j<log_data[i].length; j++) {
+					    insertElement += '<td>' + log_data[i][j] + '</td>';
+				    }
+				    insertElement += '</tr>';
+            }
+            dialog_log_SJIS.innerHTML = insertElement;
+        }
+        function Dialog_cancel_log_Save() {
+            dialog_log_Save.close();
+        }
+        function Dialog_close_log_Save() {
+            log_Data_Save_SJIS();
+            log_data = [];
+            dialog_log_Save.close();
+        }
+        function log_Data_Save_SJIS() {
+            var Temp_str = '';
+            for (var i=0; i<log_data.length; i++) {
+                for (var j=0; j<log_data[i].length; j++) {
+                    Temp_str = Temp_str + log_data[i][j] + ',';
+                }
+                Temp_str = Temp_str + '\n';
+            }
+            
+            var strArray = Encoding.stringToCode(Temp_str);
+            var convertedArray = Encoding.convert(strArray, 'SJIS', 'UNICODE');
+            var UintArray = new Uint8Array(convertedArray);
+            var blob = new Blob([UintArray], { type: 'text/csv' });
+            if (window.navigator.msSaveBlob) { 
+                window.navigator.msSaveBlob(blob, "Log_Data.csv"); 
+                // msSaveOrOpenBlobの場合はファイルを保存せずに開ける
+                window.navigator.msSaveOrOpenBlob(blob, "Log_Data.csv"); 
+            } else {
+                document.getElementById("log_download_SJIS").href = window.URL.createObjectURL(blob);
+            }
+        }
+
+// for Dummy
+        function Dialog_open_dummy() {
+            dialog_menu.close();
+            dialog_dummy.showModal();            
+        }
+        function Dialog_close_dummy() {
+            dialog_dummy.close();            
+        }
+
+    </script>
+  </body>
+</html>
