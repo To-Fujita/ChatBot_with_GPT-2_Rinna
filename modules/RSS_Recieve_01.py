@@ -71,7 +71,7 @@ def detect_character_code(pathname):
     return file_code_dic
 
 def news():
-    news_data = csv_load('./ChatBot_Non_Chan/data/News.csv')
+    news_data = csv_load('./ChatBot_with_GPT-2_Rinna-main/data/News.csv')
     total = len(news_data)
     temp = random.randint(0, total)
     temp_data = news_data[temp].split(',')
@@ -91,7 +91,7 @@ def news():
 def tenki(text_data):
     Temp_a = 'https://tenki.jp'
     Temp_b = '全国'
-    csv_data = csv_load('./ChatBot_Non_Chan/data/Tenki_jp.csv')
+    csv_data = csv_load('./ChatBot_with_GPT-2_Rinna-main/data/Tenki_jp.csv')
     for i in range(len(csv_data)):
         temp = csv_data[i].split(',')
         if temp[0] == text_data:
