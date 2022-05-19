@@ -14,7 +14,7 @@ Model_file='rinna/japanese-gpt2-xsmall'
 #Model_file='rinna/japanese-gpt2-medium'
 #Model_file='rinna/japanese-gpt-1b'
 
-CSV_file = './ChatBot_NON_Chan/data/Talk_List.csv'
+CSV_file = './ChatBot_with_GPT-2_Rinna-main/data/Talk_List.csv'
 Unk_data = 'えぇーと、'
 app = Flask(__name__, static_url_path='/static')
 tokenizer = Tokenizer()
