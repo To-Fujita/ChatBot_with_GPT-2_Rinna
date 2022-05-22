@@ -1,9 +1,10 @@
 <!-- Android では、Google Chromeの省電力設定を解除する必要があります。 -->
 <!DOCTYPE html>
 <html>
-  <title>Index_JP_Rinna.html for Chat Bot by T. Fujita 2022/05/03</title>
+  <title>Index_JP_Rinna.html for Chat Bot by T. Fujita 2022/05/22</title>
 
   <head>
+    <meta charset="utf-8" />
     <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="static/css/bot.css" />
     <link rel="stylesheet" type="text/css" href="static/css/dialog_001.css" />
@@ -19,7 +20,7 @@
         <input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px;" value="サブ・ウインドウ：非表示" onclick="Wiki_Flag();">
       </div>
       <div id="Speech_Flag">
-        <input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000; " value="音声入力 OFF" onclick="OnButtonClick_01();">
+        <input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000; " value="音声入出力 OFF" onclick="OnButtonClick_01();">
       </div>
       <input type="button" class="normalButton" value="設　定" style="position:absolute; top:60px; right:30px; font-size: 20px;" onclick="Dialog_open_menu();"/>
     </h1></Center>
@@ -110,9 +111,9 @@
 ・「何々を検索して」や「何々について検索して」、「何々について教えて」あるいは「何々とは何ですか」と入力すると、Wiki検索をします。
 ・「今日の天気は」や「＊＊の天気を教えて」「＊＊の天気予報は」で、天気予報を表示します。（＊＊は国名や大都市名等の地名です）
 ・「今日のニュースは」や「今日の出来事は」で、RSSから何かニュースを拾ってきます。
-・占いや写真、ビデオ、鳥や動物の鳴き声の検索も出来ますよ。（小ウインドウでリンクページを表示するだけですが！）
+・占いや地図、写真、ビデオ、鳥や動物の鳴き声の検索も出来ますよ。（小ウインドウでリンクページを表示するだけですが！）
 ・「メニューはあるの」や「メニューを出して」でメニュー（各種設定、会話データの読込・保存等）を表示します。
-・「音声入力終了」や「音声認識終了」で、音声入力を終了します。
+・「音声入力終了」や「音声認識終了」で、音声入出力を終了します。
 ・会話データ（Talk_Data.csv）については、次の通りです。
 ー CSVファイルとして、読込（任意のCSVファイル）および保存（Talk_Data.csv）ができます。
 ー CSVファイルは、エクセル等で作成・修正ができます。
@@ -120,7 +121,7 @@
 ー B列以降にチャットボットからの回答等を複数個記述するとランダムに選択して回答されます。
 ー チャットボットからの回答に「#NEWS#」があると、RSSから任意のニュースを読み込んで表示します。
 ー「#WEATHER#」があると天気予報を表示し、「#WIKI#」があるとウキペディアでの検索結果を表示します。
-ー「#FORTUNE#」、「#PHOTO#」、「#VIDEO#」があると、それぞれ占い、写真、ビデオ用の小ウィンドウを表示します。
+ー「#FORTUNE#」、「#PHOTO#」、「#VIDEO#」、「#MAP#」があると、それぞれ占い、写真、ビデオ、地図用の小ウィンドウを表示します。
 ー チャットボットからの回答に「#MENU#」があると、メニューを表示します。
     </textarea>
     </center>
@@ -455,12 +456,12 @@
         function OnButtonClick_01() {
             if (Flag_Speech == 1) {
                 Flag_Speech = 0;
-                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000;" value="音声入力 OFF" onclick="OnButtonClick_01();">';
+                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000;" value="音声入出力 OFF" onclick="OnButtonClick_01();">';
                 recognition.stop();
             }
             else {
                 Flag_Speech = 1;
-                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px;" value="音声入力 ON " onclick="OnButtonClick_01();">';
+                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px;" value="音声入出力 ON " onclick="OnButtonClick_01();">';
                 recognition.start();
             }
         }
@@ -488,7 +489,7 @@
             speech(data);
             if (data == '音声入力を終了しました。') {
                 Flag_Speech = 0;
-                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000;" value="音声入力 OFF" onclick="OnButtonClick_01();">';
+                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000;" value="音声入出力 OFF" onclick="OnButtonClick_01();">';
                 recognition.stop();
             }
             if (data == '占いを表示します。') {
@@ -514,7 +515,12 @@
                 temp_word = data.substr(0, call_no);
                 Dialog_open_call(temp_word);
             }
-            
+            var map_no = data.indexOf('の地図を表示します。');
+            if (map_no > 0) {
+                temp_word = data.substr(0, map_no);
+                Dialog_open_map(temp_word);
+            }
+           
             log_data.push([rawText, data]);   
 
             document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
@@ -571,13 +577,13 @@
         function confirm() {
             if ( ( !recognition.onspeechstart ) && ( !speechSynthesis.speaking ) ) { 
                 Flag_Speech = 0;
-                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000;" value="音声入力 OFF" onclick="OnButtonClick_01();">';
+                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000;" value="音声入出力 OFF" onclick="OnButtonClick_01();">';
                 recognition.stop();
             } else if ( speechSynthesis.speaking ) {
                 recognition.stop();
             } else {
                 Flag_Speech = 1;
-                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px;" value="音声入力 ON " onclick="OnButtonClick_01();">';               
+                Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px;" value="音声入出力 ON " onclick="OnButtonClick_01();">';               
                 recognition.start();
             }
         }
@@ -988,7 +994,7 @@
             dialog_menu.close();
             dialog_VoiceOptions.showModal();
             Flag_Speech = 0;
-            Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000;" value="音声入力 OFF" onclick="OnButtonClick_01();">';
+            Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000;" value="音声入出力 OFF" onclick="OnButtonClick_01();">';
             recognition.stop();
             appendVoices()
         }
@@ -1014,7 +1020,7 @@
 
 // Show Weather
         function Dialog_open_weather(temp) {
-            if (wiki_flag == 0){
+            if (wiki_flag == 0 || wiki_flag == 0){
                 return;
             }
             dialog_menu.close();
@@ -1026,6 +1032,14 @@
             dialog_weather.close();
         }
 
+// Show Map
+        function Dialog_open_map(temp) {
+            if (temp == "") {
+                return
+            }
+            window.open('https://www.google.co.jp/maps/place/' + temp, 'small_window', 'width=600,height=400,scrollbars=yes,resizable=yes'); return false;
+        }
+ 
 // Save Log Data
         function Dialog_open_log_Save() {
             var dialog_log_SJIS = document.getElementById('dialog_log_Save_SJIS');
