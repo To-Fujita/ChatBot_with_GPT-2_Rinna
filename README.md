@@ -32,7 +32,7 @@ Please install following libraries to your Python system.
 - Flask: pip install Flask
 
 ### 4-2. Try to communicate with the chat bot
-The  Chat Bot program is as follow.
+The  Chat Bot program is as follows.
 - main_JP_Rinna.py  
   or  
 - main_JP_Voicevox_Rinna.py (If you try to run this script, please run the VOICEVOX program first.)
