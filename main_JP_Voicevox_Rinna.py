@@ -1,4 +1,4 @@
-# ChatBot with GPT-2 Rinna and VoiceVox, "main_JP_Voicevox_Rinna.py" by F. Fujita on 2022/05/19
+# ChatBot with GPT-2 Rinna and VoiceVox, "main_JP_Voicevox_Rinna.py" by F. Fujita on 2022/05/22
 
 import random
 import difflib
@@ -135,6 +135,10 @@ def make_answer(tempText):
         kensaku_Word = tempText[0: tempText.find('のビデオ')]
     if ('の鳴き声' in tempText):
         kensaku_Word = tempText[0: tempText.find('の鳴き声')]
+    if ('の地図' in tempText):
+        kensaku_Word = tempText[0: tempText.find('の地図')]
+    if ('のマップ' in tempText):
+        kensaku_Word = tempText[0: tempText.find('のマップ')]
       
     if (('音声認識' in tempText or '音声入力' in tempText) and '終了' in tempText):
         return str('音声入力を終了しました。')
@@ -162,6 +166,8 @@ def make_answer(tempText):
             temp_Answer = kensaku_Word + 'のビデオを表示します。'
         if ('#CALL#') in temp_Answer:
             temp_Answer = kensaku_Word + 'ですね、鳥以外には対応していません。動物の鳴き声は「東京ズーネット」で検索してください。'
+        if ('#MAP#') in temp_Answer:
+            temp_Answer = kensaku_Word + 'の地図を表示します。'
         
         generate_wav(temp_Answer, Speaker_No, filepath, voice_count_text)      
         return str(voice_count_text + ':' + temp_Answer)
@@ -240,7 +246,7 @@ def PatternResponder(tempText):
     elif (array_No > len(answer_data)) or (max_count <= ai_ratio):
         temp_Answer = in_out(str(tempText))
         temp_Answer = temp_Answer.replace(' ', '')
-        temp_Answer = temp_Answer.replace('__unk__', Unk_data)
+        temp_Answer = temp_Answer.replace('<unk>', Unk_data)
     return temp_Answer
 
 def generate_wav(text, speaker, filepath, voice_count_text):
