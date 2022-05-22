@@ -33,7 +33,8 @@ Please install following libraries to your Python system.
 
 ### 4-2. Try to communicate with the chat bot
 The  Chat Bot program is as follow.
-- main_JP_Rinna.py
+- main_JP_Rinna.py  or
+- main_JP_Voicevox_Rinna.py (If you try to run this script, please run the VOICEVOX program first.)
 
 Please open the above file on the VS Code, then click the "Run" and the "Start Debugging" or the "Run Without Debugging". Wait a few minutes, it will be displayed "*Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)" at the Terminal.
 Then, after open the Browser, please input "http://127.0.0.1:5000". You can talk with the Chat Bot by keybord and/or voice.
@@ -51,6 +52,7 @@ In this time, I used the "Dialog Element" in HTML. The Safari and the FireFox ar
 - [GPT-2 Rinna](https://rinna.co.jp/)
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Python](https://www.python.org/)
+- [VOICEVOX](https://voicevox.hiroshiba.jp/)
 
 ## 6. License
 - Programs: MIT
