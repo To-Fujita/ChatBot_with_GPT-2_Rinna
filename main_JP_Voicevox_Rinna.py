@@ -1,4 +1,4 @@
-# ChatBot with GPT-2 Rinna and VoiceVox, "main_JP_Voicevox_Rinna.py" by F. Fujita on 2022/05/22
+# ChatBot with GPT-2 Rinna and VoiceVox, "main_JP_Voicevox_Rinna.py" by F. Fujita on 2022/05/23
 
 import random
 import difflib
@@ -17,7 +17,10 @@ Model_file='rinna/japanese-gpt2-xsmall'
 #Model_file='rinna/japanese-gpt2-medium'
 #Model_file='rinna/japanese-gpt-1b'
 
-CSV_file = './ChatBot_with_GPT-2_Rinna-main/data/Talk_List.csv'
+file_path = './ChatBot_with_GPT-2_Rinna-main/'            # 貴方の環境に合わせてパス設定を変更してください。
+CSV_file = file_path + 'data/Talk_List.csv'
+news_file = file_path + 'data/News.csv'
+tenki_file = file_path + 'data/Tenki_jp.csv'
 Unk_data= 'あのね、'
 app = Flask(__name__, static_url_path='/static')
 tokenizer = Tokenizer()
@@ -145,10 +148,10 @@ def make_answer(tempText):
     else:
         temp_Answer = PatternResponder(tempText)
         if ('#NEWS#' in temp_Answer):
-            temp = RSS_Recieve_01.news()
+            temp = RSS_Recieve_01.news(news_file)
             temp_Answer = temp_Answer.replace('#NEWS#', temp)
         if ('#WEATHER#') in temp_Answer:
-            temp_Answer = RSS_Recieve_01.tenki(area_name)
+            temp_Answer = RSS_Recieve_01.tenki(area_name, tenki_file)
         if ('#WIKI#') in temp_Answer:
             if (kensaku_Word == 'ウィキペディア'):
                 for i in range(1, len(wakati) - 1):
