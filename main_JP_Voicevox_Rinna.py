@@ -31,7 +31,7 @@ ai_ratio = 0.5
 text_length = 64
 Speaker_No = 0
 voice_count = 0
-filepath = './ChatBot_with_GPT-2_Rinna-main/static/audio/audio'
+filepath = file_path + 'static/audio/audio'
 
 @app.route("/")
 # Display by the HTML
