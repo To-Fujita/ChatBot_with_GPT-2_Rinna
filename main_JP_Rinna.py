@@ -1,4 +1,4 @@
-# ChatBot with GPT-2 Rinna, "main_JP_Rinna.py" by F. Fujita on 2022/05/23
+# ChatBot with GPT-2 Rinna, "main_JP_Rinna.py" by F. Fujita on 2022/05/24
 
 import random
 import difflib
@@ -123,7 +123,13 @@ def make_answer(tempText):
         kensaku_Word = tempText[0: tempText.find('の地図')]
     if ('のマップ' in tempText):
         kensaku_Word = tempText[0: tempText.find('のマップ')]
-  
+    if ('のレシピ' in tempText):
+        kensaku_Word = tempText[0: tempText.find('のレシピ')]
+    if ('の調理法' in tempText):
+        kensaku_Word = tempText[0: tempText.find('の調理法')]
+    if ('の料理の仕方' in tempText):
+        kensaku_Word = tempText[0: tempText.find('の料理の仕方')]
+ 
     if (('音声認識' in tempText or '音声入力' in tempText) and '終了' in tempText):
         return str('音声入力を終了しました。')
     else:
@@ -152,6 +158,8 @@ def make_answer(tempText):
             temp_Answer = kensaku_Word + 'ですね、鳥以外には対応していません。動物の鳴き声は「東京ズーネット」で検索してください。'
         if ('#MAP#') in temp_Answer:
             temp_Answer = kensaku_Word + 'の地図を表示します。'
+        if ('#RECIPE#') in temp_Answer:
+            temp_Answer = kensaku_Word + 'のレシピを表示します。'
         
         return str(temp_Answer)
 
