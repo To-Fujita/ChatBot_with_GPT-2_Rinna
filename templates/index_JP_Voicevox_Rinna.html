@@ -1,7 +1,7 @@
 <!-- Android では、Google Chromeの省電力設定を解除する必要があります。 -->
 <!DOCTYPE html>
 <html>
-  <title>Index_JP_Voicevox_Rinna.html for Chat Bot by T. Fujita 2022/05/22</title>
+  <title>Index_JP_Voicevox_Rinna.html for Chat Bot by T. Fujita 2022/05/24</title>
 
   <head>
     <meta charset="utf-8" />
@@ -115,7 +115,7 @@
 ・「何々を検索して」や「何々について検索して」、「何々について教えて」あるいは「何々とは何ですか」で、Wiki検索をします。
 ・「今日の天気は」や「＊＊の天気を教えて」「＊＊の天気予報は」で、天気予報を表示します。（＊＊は国名や主要都市名等の地名です）
 ・「今日のニュースは」や「今日の出来事は」で、RSSから何かニュースを拾ってきます。
-・占いや地図、写真、映像、鳥や動物の鳴き声の検索も出来ますよ。（小ウインドウでリンクページを表示するだけですが！）
+・占いや地図、料理のレシピ、写真、映像、鳥や動物の鳴き声の検索も出来ますよ。（小ウインドウでリンクページを表示するだけですが！）
 ・「メニューはあるの」や「メニューを出して」で、メニュー（各種設定、会話データの読込・保存等）を表示します。
 ・「音声入力終了」や「音声認識終了」で、音声入力を終了します。
 ・会話データ（Talk_Data.csv）については、次の通りです。
@@ -125,7 +125,7 @@
 ー B列以降にチャットボットからの回答等を複数個記述するとランダムに選択して回答されます。
 ー チャットボットからの回答に「#NEWS#」があると、RSSから任意のニュースを読み込んで表示します。
 ー「#WEATHER#」があると天気予報を表示し、「#WIKI#」があるとウキペディアでの検索結果を表示します。
-ー「#FORTUNE#」、「#PHOTO#」、「#VIDEO#」、「#MAP#」があると、それぞれ占い、写真、ビデオ、地図用の小ウィンドウを表示します。
+ー「#FORTUNE#」、「#PHOTO#」、「#VIDEO#」、「#MAP#」、「#RECIPE#」があると、それぞれ占い、写真、ビデオ、地図、料理のレシピ用の小ウィンドウを表示します。
 ー チャットボットからの回答に「#MENU#」があると、メニューを表示します。
     </textarea>
     </center>
@@ -544,7 +544,11 @@
                 temp_word = data.substr(5, (map_no - 5));
                 Dialog_open_map(temp_word);
             }
-
+            var recipe_no = data.indexOf('のレシピを表示します。');
+            if (recipe_no > 0) {
+                temp_word = data.substr(5, (recipe_no - 5));
+                Dialog_open_recipe(temp_word);
+            }
             speech(data);
             log_data.push([rawText, data]);
             document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
@@ -1078,6 +1082,14 @@
                 return
             }
             window.open('https://www.google.co.jp/maps/place/' + temp, 'small_window', 'width=600,height=400,scrollbars=yes,resizable=yes'); return false;
+        }
+ 
+// Show Recipe
+        function Dialog_open_recipe(temp) {
+            if (temp == "") {
+                return
+            }
+            window.open('https://cookpad.com/search/' + temp, 'small_window', 'width=600,height=400,scrollbars=yes,resizable=yes'); return false;
         }
  
 // Save Log Data
