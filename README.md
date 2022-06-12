@@ -2,7 +2,7 @@
 
 ## 1. Description
 This is a chat bot for Japanese based on the GPT-2 Rinna. You can talk to this chat bot by keyboard and/or voice.  
-If you want to enjoy conversation in English, please check the "[ChatBot_with_ParlAI](https://github.com/To-Fujita/ChatBot_with_ParlAI)".
+If you want to enjoy conversation in English, please check the "[ChatBot_with_ParlAI](https://github.com/To-Fujita/ChatBot_with_ParlAI)". The [Japanese_ChatBot_with_ParlAI](https://github.com/To-Fujita/Japanese_ChatBot_with_ParlAI) is also available.
 
 ## 2. Operational Environment
 - Windows 10/11 64-bit
@@ -54,6 +54,8 @@ In this time, I used the "Dialog Element" in HTML. The Safari and the FireFox ar
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Python](https://www.python.org/)
 - [VOICEVOX](https://voicevox.hiroshiba.jp/)
+- [ChatBot_with_ParlAI](https://github.com/To-Fujita/ChatBot_with_ParlAI)
+- [Japanese_ChatBot_with_ParlAI](https://github.com/To-Fujita/Japanese_ChatBot_with_ParlAI)
 
 ## 6. License
 - Programs: MIT
