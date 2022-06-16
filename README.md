@@ -11,6 +11,9 @@ If you want to enjoy conversation in English, please check the "[ChatBot_with_Pa
 - Browser: Microsoft Edge or Google Chrome
 
 ## 3. Demo
+
+![ChatBot_001](https://to-fujita.github.io/Images/Rinna_01.png "Images for ChatBot")
+  
 Sample for the Japanese conversation without Rinna. (The answer by chatbot.)
 ![ChatBot_002](https://to-fujita.github.io/Images/Rinna_02.png "Images for ChatBot")
   
