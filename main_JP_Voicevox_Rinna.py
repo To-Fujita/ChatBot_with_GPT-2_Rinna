@@ -264,6 +264,9 @@ def generate_wav(text, speaker, filepath, voice_count_text):
     filepath = filepath + voice_count_text + '.wav'
     host = 'localhost'
     port = 50021
+    pos = text.find('http')
+    if (pos > 1):
+        text = text[:pos]
     params = (
         ('text', text),
         ('speaker', speaker),
