@@ -291,6 +291,6 @@ def generate_wav(text, speaker, filepath, voice_count_text):
     wf.close()
 
 if __name__ == "__main__":
-    random.seed(None)
+    # random.seed(None)
     init()
     app.run(host='127.0.0.1', port=5000, debug=True)

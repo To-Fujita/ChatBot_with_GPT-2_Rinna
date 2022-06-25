@@ -241,6 +241,6 @@ def PatternResponder(tempText):
     return temp_Answer
 
 if __name__ == "__main__":
-    random.seed(None)
+    # random.seed(None)
     init()
     app.run(host='127.0.0.1', port=5000, debug=True)
