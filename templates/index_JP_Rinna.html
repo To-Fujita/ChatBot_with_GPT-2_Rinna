@@ -17,7 +17,7 @@
       日本語チャットボット with Rinna
       <img src="/static/images/R_012_R.png" alt="CANDICE" style="width:50px;height:50px;vertical-align:bottom;transform: scale(-1, 1);"/><br>
       <div id="Wiki_Search">
-        <input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px;" value="サブ・ウインドウ：非表示" onclick="Wiki_Flag();">
+        <input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color: #ff0000;" value="サブ・ウインドウ：非表示" onclick="Wiki_Flag();">
       </div>
       <div id="Speech_Flag">
         <input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000; " value="音声入出力 OFF" onclick="OnButtonClick_01();">
@@ -913,10 +913,10 @@
         function Wiki_Flag() {
             if (wiki_flag == 0) {
                 wiki_flag = 1;
-                wiki_search.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color:#ff0000;" value="サブ・ウインドウ：　表示" onclick="Wiki_Flag();">';
+                wiki_search.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color: #005005;" value="サブ・ウインドウ：　表示" onclick="Wiki_Flag();">';
             } else {
                 wiki_flag = 0;
-                wiki_search.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px;" value="サブ・ウインドウ：非表示" onclick="Wiki_Flag();">';
+                wiki_search.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color: #ff0000;" value="サブ・ウインドウ：非表示" onclick="Wiki_Flag();">';
             }
         }
         function Dialog_open_wiki(temp) {
