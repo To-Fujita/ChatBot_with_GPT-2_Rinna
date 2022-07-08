@@ -1,4 +1,4 @@
-# ChatBot with GPT-2 Rinna, "main_JP_Rinna.py" by F. Fujita on 2022/05/24
+# ChatBot with GPT-2 Rinna, "main_JP_Rinna.py" by F. Fujita on 2022/06/30
 
 import random
 import difflib
@@ -18,12 +18,14 @@ file_path = './ChatBot_with_GPT-2_Rinna-main/'            # 貴方の環境に�
 CSV_file = file_path + 'data/Talk_List.csv'
 news_file = file_path + 'data/News.csv'
 tenki_file = file_path + 'data/Tenki_jp.csv'
+link_file = file_path + 'data/Link_List.csv'
 Unk_data = 'えぇーと、'
 app = Flask(__name__, static_url_path='/static')
 tokenizer = Tokenizer()
 t_wakati = Tokenizer(wakati=True)
 area_name = '日本'
 answer_data = []
+link_data = []
 ai_ratio = 0.5
 text_length = 64
 
@@ -105,63 +107,34 @@ def make_answer(tempText):
                 if (token.surface != '何'):
                     kensaku_Word = token.surface
     wakati = list(t_wakati.tokenize(tempText))
-    if ('について検索' in tempText):
-        kensaku_Word = tempText[0: tempText.find('について検索')]
-    if ('の写真' in tempText):
-        kensaku_Word = tempText[0: tempText.find('の写真')]
-    if ('の画像' in tempText):
-        kensaku_Word = tempText[0: tempText.find('の画像')]
-    if ('の動画' in tempText):
-        kensaku_Word = tempText[0: tempText.find('の動画')]
-    if ('の映像' in tempText):
-        kensaku_Word = tempText[0: tempText.find('の映像')]
-    if ('のビデオ' in tempText):
-        kensaku_Word = tempText[0: tempText.find('のビデオ')]
-    if ('の鳴き声' in tempText):
-        kensaku_Word = tempText[0: tempText.find('の鳴き声')]
-    if ('の地図' in tempText):
-        kensaku_Word = tempText[0: tempText.find('の地図')]
-    if ('のマップ' in tempText):
-        kensaku_Word = tempText[0: tempText.find('のマップ')]
-    if ('のレシピ' in tempText):
-        kensaku_Word = tempText[0: tempText.find('のレシピ')]
-    if ('の調理法' in tempText):
-        kensaku_Word = tempText[0: tempText.find('の調理法')]
-    if ('の料理の仕方' in tempText):
-        kensaku_Word = tempText[0: tempText.find('の料理の仕方')]
- 
-    if (('音声認識' in tempText or '音声入力' in tempText) and '終了' in tempText):
-        return str('音声入力を終了しました。')
-    else:
-        temp_Answer = PatternResponder(tempText)
-        if ('#NEWS#' in temp_Answer):
-            temp = RSS_Recieve_01.news(news_file)
-            temp_Answer = temp_Answer.replace('#NEWS#', temp)
-        if ('#WEATHER#') in temp_Answer:
-            temp_Answer = RSS_Recieve_01.tenki(area_name, tenki_file)
-        if ('#WIKI#') in temp_Answer:
-            if (kensaku_Word == 'ウィキペディア'):
-                for i in range(1, len(wakati) - 1):
-                    if (wakati[i] == 'を' or wakati[i] == 'とは' or wakati[i] == '永遠'):
-                        kensaku_Word = wakati[i-1]
-                    if (wakati[i] == 'について'):
-                        kensaku_Word = tempText[0: tempText.find('について')]
-            temp = RSS_Recieve_01.kensaku(kensaku_Word)
-            temp_Answer = kensaku_Word + 'の検索結果は、' + temp_Answer.replace('#WIKI#', temp)
-        if ('#FORTUNE#') in temp_Answer:
-            temp_Answer = '占いを表示します。'
-        if ('#PHOTO#') in temp_Answer:
-            temp_Answer = kensaku_Word + 'の画像を表示します。'
-        if ('#VIDEO#') in temp_Answer:
-            temp_Answer = kensaku_Word + 'のビデオを表示します。'
-        if ('#CALL#') in temp_Answer:
-            temp_Answer = kensaku_Word + 'ですね、鳥以外には対応していません。動物の鳴き声は「東京ズーネット」で検索してください。'
-        if ('#MAP#') in temp_Answer:
-            temp_Answer = kensaku_Word + 'の地図を表示します。'
-        if ('#RECIPE#') in temp_Answer:
-            temp_Answer = kensaku_Word + 'のレシピを表示します。'
-        
-        return str(temp_Answer)
+    for i in range(0, len(link_data)):
+        if (link_data[i][1] in tempText):
+            kensaku_Word = tempText[0: tempText.find(link_data[i][1])]
+
+    temp_Answer = PatternResponder(tempText)
+    if ('#NEWS#' in temp_Answer):
+        temp = RSS_Recieve_01.news(news_file)
+        temp_Answer = temp_Answer.replace('#NEWS#', temp)
+    if ('#WEATHER#') in temp_Answer:
+        temp_Answer = RSS_Recieve_01.tenki(area_name, tenki_file)
+    if ('#WIKI#') in temp_Answer:
+        if (kensaku_Word == 'ウィキペディア'):
+            for i in range(1, len(wakati) - 1):
+                if (wakati[i] == 'を' or wakati[i] == 'とは' or wakati[i] == '永遠'):
+                    kensaku_Word = wakati[i-1]
+                if (wakati[i] == 'について'):
+                    kensaku_Word = tempText[0: tempText.find('について')]
+        temp = RSS_Recieve_01.kensaku(kensaku_Word)
+        temp_Answer = kensaku_Word + 'の検索結果は、' + temp_Answer.replace('#WIKI#', temp) + "https://ja.wikipedia.org/wiki/" + kensaku_Word
+    elif ('#') in temp_Answer:
+        temp_data = temp_Answer
+        for i in range(0, len(link_data)):
+            if link_data[i][0] in temp_Answer:
+                temp_data = link_data[i][2] + link_data[i][3] + link_data[i][4] + link_data[i][5]
+            temp_data = temp_data.replace('$NON$', '')
+            temp_data = temp_data.replace('$KEY$', kensaku_Word)
+        temp_Answer = temp_data        
+    return str(temp_Answer)
 
 # ChatBot
 def in_out(temp_text):
@@ -186,25 +159,29 @@ def in_out(temp_text):
 
 def init():
     global answer_data
+    global link_data
     answer_data = []
-    temp_data = csv_load(CSV_file)
-    for i in range(len(temp_data)):
-        temp = temp_data[i].split(',')
-        if (temp[0] != ""):
-            temp_temp = []
-            for j in range(len(temp)):
-                if (temp[j] != "" or temp[j] != "\r\n" or temp[j] != "\n"):
-                   temp_temp.append(temp[j])
-            answer_data.append(temp_temp)
+    answer_data = csv_load(CSV_file)
+    link_data = []
+    link_data = csv_load(link_file)
     return
 
 def csv_load(filename):
     lines = []
+    return_data = []
     file_code = detect_character_code(filename)
     with open (filename, encoding=file_code) as csvfile:
         for line in csvfile.readlines():
             lines.append(line)
-    return lines
+    for i in range(len(lines)):
+        temp = lines[i].split(',')
+        if (temp[0] != ""):
+            temp_data = []
+            for j in range(len(temp)):
+                if (temp[j] != "" or temp[j] != "\r\n" or temp[j] != "\n"):
+                    temp_data.append(temp[j])
+            return_data.append(temp_data)
+    return return_data
 
 def detect_character_code(pathname):
     file_code_dic = ''
@@ -241,6 +218,6 @@ def PatternResponder(tempText):
     return temp_Answer
 
 if __name__ == "__main__":
-    # random.seed(None)
+    #random.seed(None)
     init()
     app.run(host='127.0.0.1', port=5000, debug=True)
