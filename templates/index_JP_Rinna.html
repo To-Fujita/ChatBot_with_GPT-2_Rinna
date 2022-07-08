@@ -1,7 +1,7 @@
 <!-- Android では、Google Chromeの省電力設定を解除する必要があります。 -->
 <!DOCTYPE html>
 <html>
-  <title>Index_JP_Rinna.html for Chat Bot by T. Fujita 2022/05/24</title>
+  <title>Index_JP_Rinna.html for Chat Bot by T. Fujita 2022/06/30</title>
 
   <head>
     <meta charset="utf-8" />
@@ -16,8 +16,8 @@
       <img src="/static/images/R_011_R.png" alt="CANDICE" style="width:50px;height:50px;vertical-align:bottom;"/>
       日本語チャットボット with Rinna
       <img src="/static/images/R_012_R.png" alt="CANDICE" style="width:50px;height:50px;vertical-align:bottom;transform: scale(-1, 1);"/><br>
-      <div id="Wiki_Search">
-        <input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color: #ff0000;" value="サブ・ウインドウ：非表示" onclick="Wiki_Flag();">
+      <div id="Sub_Win">
+        <input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color: #ff0000;" value="サブ・ウインドウ：非表示" onclick="Win_Sel();">
       </div>
       <div id="Speech_Flag">
         <input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000; " value="音声入出力 OFF" onclick="OnButtonClick_01();">
@@ -302,69 +302,6 @@
     <input type="button" class="rightButton" value="決定" onclick="Dialog_close_Slider()">
 </dialog>
 
-<!-- Dialog Box for Show Wiki -->
-<dialog dialog id="dialog_wiki">
-    <center>
-        ダイアログ（Show WIKI）
-    </center>
-    <hr>
-    <div id="show_wiki">
-        <iframe src="https://ja.wikipedia.org/wiki/ウィキペディア" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);""></iframe>
-    </div>
-    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_wiki()">
-</dialog>
-
-<!-- Dialog Box for Show Fortune -->
-<dialog dialog id="dialog_fortune">
-    <center>
-        ダイアログ（Show Fortune）
-    </center>
-    <hr>
-    <div id="show_fortune">
-        <iframe src="https://https://fortune.yahoo.co.jp/12astro/index.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);""></iframe>
-    </div>
-    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_fortune()">
-</dialog>
-
-<!-- Dialog Box for Show Picture -->
-<dialog dialog id="dialog_picture">
-    <center>
-        ダイアログ（Show Picture by Bing）
-    </center>
-    <hr>
-    <div id="show_picture">
-        <iframe src="https://www.bing.com/images/search?q=人間" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
-    </div>
-    <input type="button" class="leftButton" value="Googleで検索" onclick="Google_picture()">
-    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_picture()">
-</dialog>
-
-<!-- Dialog Box for Show Video -->
-<dialog dialog id="dialog_video">
-    <center>
-        ダイアログ（Show Video by Bing）
-    </center>
-    <hr>
-    <div id="show_video">
-        <iframe src="https://www.bing.com/videos/search?q=人間" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
-    </div>
-    <input type="button" class="leftButton" value="Googleで検索" onclick="Google_picture()">
-    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_video()">
-</dialog>
-
-<!-- Dialog Box for Call -->
-<dialog dialog id="dialog_call">
-    <center>
-        ダイアログ（Call by Suntory）
-    </center>
-    <hr>
-    <div id="show_call">
-        <iframe src="https://www.suntory.co.jp/eco/birds/encyclopedia/nakigoe.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
-    </div>
-    <input type="button" class="leftButton" value="東京ズーネットで検索" onclick="TokyoZooNet()">
-    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_call()">
-</dialog>
-
 <!-- Dialog Box for Voice Options -->
 <dialog dialog id="dialog_VoiceOptions">
     <center>
@@ -381,18 +318,6 @@
     </center>
     <hr>
     <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_VoiceOptions()">
-</dialog>
-
-<!-- Dialog Box for Weather -->
-<dialog dialog id="dialog_weather">
-    <center>
-        ダイアログ（Show Weather）
-    </center>
-    <hr>
-    <div id="show_weather">
-        <iframe src="https://tenki.jp" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>
-    </div>
-    <input type="button" class="rightButton" value="閉じる" onclick="Dialog_close_weather()">
 </dialog>
 
 <dialog dialog id="dialog_log_Save">
@@ -480,56 +405,24 @@
           $("#chatbox").append(userHtml);
           document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
           $.get("/get", { msg: rawText }).done(function(data) { 
-            var weather_no = data.indexOf('http');
-            if (weather_no > 0) {
+            var link_no = data.indexOf('http');
+            if (link_no > 0) {
                 temp = data;
-                temp_word = temp.substr( 0, weather_no );
-                temp_url = temp.substr( weather_no );
+                temp_word = temp.substr( 0, link_no );
+                temp_url = temp.substr( link_no );
                 data = temp_word;
-                Dialog_open_weather(temp_url);
+                Dialog_open_link(temp_url);
             }
             var Temp = data.replace(/\n/g, '<br>');
             var botHtml = '<p class="botText"><img src=' + bot_icon + ' alt="BOT" style="width:50px;height:50px;vertical-align:bottom;"/><span>' + Temp + '</span></p>';
             $("#chatbox").append(botHtml);
             speech(data);
-            if (data == '音声入力を終了しました。') {
+            if (data.indexOf('音声入力を終了') >= 0) {
                 Flag_Speech = 0;
                 Speak.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:45%; font-size: 20px; background-color: #ff0000;" value="音声入出力 OFF" onclick="OnButtonClick_01();">';
                 recognition.stop();
             }
-            if (data == '占いを表示します。') {
-                Dialog_open_fortune('#Fortune#');
-            }
-            var temp_no = data.indexOf('の検索結果');
-            if (temp_no > 0) {
-                temp_word = data.substr(0, temp_no);
-                Dialog_open_wiki(temp_word);
-            }
-            var photo_no = data.indexOf('の画像を表示します。');
-            if (photo_no > 0) {
-                temp_word = data.substr(0, photo_no);
-                Dialog_open_picture(temp_word);
-            }
-            var video_no = data.indexOf('のビデオを表示します。');
-            if (video_no > 0) {
-                temp_word = data.substr(0, video_no);
-                Dialog_open_video(temp_word);
-            }
-            var call_no = data.indexOf('ですね、鳥以外には対応していません。');
-            if (call_no > 0) {
-                temp_word = data.substr(0, call_no);
-                Dialog_open_call(temp_word);
-            }
-            var map_no = data.indexOf('の地図を表示します。');
-            if (map_no > 0) {
-                temp_word = data.substr(0, map_no);
-                Dialog_open_map(temp_word);
-            }
-            var recipe_no = data.indexOf('のレシピを表示します。');
-            if (recipe_no > 0) {
-                temp_word = data.substr(0, recipe_no);
-                Dialog_open_recipe(temp_word);
-            }           
+
             log_data.push([rawText, data]);   
 
             document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
@@ -907,95 +800,17 @@
             slider_Val.innerHTML = "AI使用率= " + range_Val.value + " %";
         } 
 
-// Show Wikipedia
-        var wiki_flag = 0;
-        var wiki_search = document.getElementById('Wiki_Search')
-        function Wiki_Flag() {
-            if (wiki_flag == 0) {
-                wiki_flag = 1;
-                wiki_search.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color: #005005;" value="サブ・ウインドウ：　表示" onclick="Wiki_Flag();">';
+// Show Sub-window
+        var win_flag = 0;
+        var sub_win = document.getElementById('Sub_Win')
+        function Win_Sel() {
+            if (win_flag == 0) {
+                win_flag = 1;
+                sub_win.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color:#005005;" value="サブ・ウインドウ：　表示" onclick="Win_Sel();">';
             } else {
-                wiki_flag = 0;
-                wiki_search.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color: #ff0000;" value="サブ・ウインドウ：非表示" onclick="Wiki_Flag();">';
+                win_flag = 0;
+                sub_win.innerHTML = '<input type="button" class="normalButton" style="position:absolute; top:60px; left:3%; font-size: 20px; background-color:#ff0000;" value="サブ・ウインドウ：非表示" onclick="Win_Sel();">';
             }
-        }
-        function Dialog_open_wiki(temp) {
-            if (temp == "" || wiki_flag == 0) {
-                return
-            }
-            show_HTML = document.getElementById("show_wiki");
-            show_HTML.innerHTML = '<iframe src="https://ja.wikipedia.org/wiki/' + temp + '" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
-            dialog_wiki.showModal();
-        }
-        function Dialog_close_wiki() {
-            dialog_wiki.close();
-        }
-
-// Show Fortune
-        function Dialog_open_fortune(temp) {
-            if (temp != '#Fortune#' || wiki_flag == 0) {
-                return
-            }
-            show_HTML = document.getElementById("show_fortune");
-            temp = 10 * Math.random();
-            if (temp < 3) {
-                show_HTML.innerHTML = '<iframe src="https://fortune.yahoo.co.jp/12astro/index.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
-            }
-            else if (temp < 6) {
-                show_HTML.innerHTML = '<iframe src="https://fortune.yahoo.co.jp/omikuji/index.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
-            }
-            else {
-                show_HTML.innerHTML = '<iframe src="https://fortune.yahoo.co.jp/toyo/index.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
-            }
-            dialog_fortune.showModal();
-        }
-        function Dialog_close_fortune() {
-            dialog_fortune.close();
-        }
-
-// Show Picture
-        function Dialog_open_picture(temp) {
-            if (temp == "" || wiki_flag == 0) {
-                return
-            }
-            show_HTML = document.getElementById("show_picture");
-            show_HTML.innerHTML = '<iframe src="https://www.bing.com/images/search?q=' + temp + '" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
-            dialog_picture.showModal();
-        }
-        function Dialog_close_picture() {
-            dialog_picture.close();
-        }
-        function Google_picture() {
-            window.open('https://www.google.com/search?q='+ temp_word, 'small_window', 'width=500,height=400,scrollbars=yes,resizable=yes'); return false;
-        }
-
-// Show Video
-        function Dialog_open_video(temp) {
-            if (temp == "" || wiki_flag == 0) {
-                return
-            }
-            show_HTML = document.getElementById("show_video");
-            show_HTML.innerHTML = '<iframe src="https://www.bing.com/videos/search?q=' + temp + '" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
-            dialog_video.showModal();
-        }
-        function Dialog_close_video() {
-            dialog_video.close();
-        }
-
-// Call
-        function Dialog_open_call(temp) {
-            if (temp == "" || wiki_flag == 0) {
-                return
-            }
-            show_HTML = document.getElementById("show_call");
-            show_HTML.innerHTML = '<iframe src="https://www.suntory.co.jp/eco/birds/encyclopedia/nakigoe.html" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
-            dialog_call.showModal();
-        }
-        function Dialog_close_call() {
-            dialog_call.close();
-        }
-        function TokyoZooNet() {
-            window.open('https://www.tokyo-zoo.net/cry/index.html', 'small_window', 'width=500,height=400,scrollbars=yes,resizable=yes'); return false;
         }
 
 // Voice Select
@@ -1027,34 +842,12 @@
             });
         }        
 
-// Show Weather
-        function Dialog_open_weather(temp) {
-            if (wiki_flag == 0 || wiki_flag == 0){
-                return;
-            }
-            dialog_menu.close();
-            show_HTML = document.getElementById("show_weather");
-            show_HTML.innerHTML = '<iframe src="' + temp + '" width="750px" height="420px" style="position:relative; top:-84px; left:-127px; transform:scale(0.66);"></iframe>';
-            dialog_weather.showModal();
-        }
-        function Dialog_close_weather() {
-            dialog_weather.close();
-        }
-
-// Show Map
-        function Dialog_open_map(temp) {
-            if (temp == "") {
+// Show Link
+        function Dialog_open_link(temp) {
+            if (temp == "" || win_flag == 0) {
                 return
             }
-            window.open('https://www.google.co.jp/maps/place/' + temp, 'small_window', 'width=600,height=400,scrollbars=yes,resizable=yes'); return false;
-        }
- 
-// Show Recipe
-        function Dialog_open_recipe(temp) {
-            if (temp == "") {
-                return
-            }
-            window.open('https://cookpad.com/search/' + temp, 'small_window', 'width=600,height=400,scrollbars=yes,resizable=yes'); return false;
+            window.open( temp, 'small_window', 'width=600,height=400,scrollbars=yes,resizable=yes'); return false;
         }
  
 // Save Log Data
