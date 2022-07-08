@@ -49,12 +49,13 @@ def forming(temp_text):
         return_text = return_text.replace('\n\n', '\n')
     return return_text
 
-def csv_load(filename):
+def Csv_Load(filename):
     lines = []
     file_code = detect_character_code(filename)
     with open (filename, encoding=file_code) as csvfile:
         for line in csvfile.readlines():
-            lines.append(line)
+            if (line[0] != ','):
+                lines.append(line)
     return lines
 
 def detect_character_code(pathname):
@@ -71,7 +72,7 @@ def detect_character_code(pathname):
     return file_code_dic
 
 def news(news_file):
-    news_data = csv_load(news_file)
+    news_data = Csv_Load(news_file)
     total = len(news_data)
     temp = random.randint(0, total)
     temp_data = news_data[temp].split(',')
@@ -91,7 +92,7 @@ def news(news_file):
 def tenki(text_data, tenki_file):
     Temp_a = 'https://tenki.jp'
     Temp_b = '全国'
-    csv_data = csv_load(tenki_file)
+    csv_data = Csv_Load(tenki_file)
     for i in range(len(csv_data)):
         temp = csv_data[i].split(',')
         if temp[0] == text_data:
