@@ -14,7 +14,7 @@ Model_file='rinna/japanese-gpt2-xsmall'
 #Model_file='rinna/japanese-gpt2-medium'
 #Model_file='rinna/japanese-gpt-1b'
 
-file_path = './ChatBot_with_GPT-2_Rinna-main/'            # 貴方の環境に合わせてパス設定を変更してください。
+file_path = './ChatBot_with_GPT-2_Rinna-main/'                   # Please set the PATH name according to your environment.
 CSV_file = file_path + 'data/Talk_List.csv'
 news_file = file_path + 'data/News.csv'
 tenki_file = file_path + 'data/Tenki_jp.csv'
